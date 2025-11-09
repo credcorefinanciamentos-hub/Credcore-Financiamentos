@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CREDCORE Financiamentos</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --gold:#ffd700;
+  --bg:#000;
+  --accent:#25d366;
+  --card:#0d0d0d;
+  --muted:#cfcfcf;
+  --maxwidth:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif;}
+html,body{height:100%}
+body{background:var(--bg);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.header{
+  width:100%;
+  background:linear-gradient(180deg,#000,#080808);
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  box-shadow:0 6px 30px rgba(0,0,0,0.6);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:70px;height:70px;border-radius:12px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,215,0,0.06)}
+.logo img{width:100%;height:100%;object-fit:cover}
+.header h1{color:#fff;font-size:1.4rem;margin:0}
+.header .tag{color:var(--muted);font-size:0.85rem}
+
+/* ===== BANNER (original style you liked) ===== */
+.banner-area{
+  position:relative;
+  width:100%;
+  height:520px; /* keep original */
+  padding-bottom:30px; /* ensures simulator border aligns */
+  overflow:hidden;
+  background:linear-gradient(120deg,#050505 30%, rgba(255,215,0,0.03) 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+}
+.banner-area img.mulher{
+  position:absolute;
+  left:12%;
+  bottom:0;
+  height:92%;
+  object-fit:contain;
+  z-index:1;
+  transform:scaleX(-1);
+  filter:drop-shadow(0 18px 40px rgba(0,0,0,0.6));
+  animation:floaty 4s ease-in-out infinite alternate;
+}
+@keyframes floaty{0%{transform:translateY(0) scaleX(-1);}100%{transform:translateY(-8px) scaleX(-1);}}
+.banner-text{
+  position:relative;
+  z-index:2;
+  margin-left:48%;
+  max-width:480px;
+  text-align:left;
+}
+.banner-text h2{
+  background:linear-gradient(90deg,var(--gold),#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-size:2.2rem;
+  margin-bottom:10px;
+  font-weight:700;
+}
+.banner-text p{color:#eaeaea;font-size:1rem;margin-bottom:16px;line-height:1.5}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:#000;padding:12px 22px;border-radius:999px;font-weight:700;border:none;cursor:pointer}
+.whatsapp-icon{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#0fbf5b);color:#fff;border:none;cursor:pointer;font-weight:700}
+
+/* SIMULADOR (aligned under banner, border touches banner) */
+.simulador{
+  max-width:var(--maxwidth);
+  width:95%;
+  margin:0 auto;            /* top margin 0 so it touches banner bottom */
+  background:linear-gradient(180deg,#0b0b0b,#070707);
+  border-radius:14px;
+  padding:36px 40px;
+  border:1px solid rgba(255,215,0,0.08);
+  box-shadow:0 18px 50px rgba(0,0,0,0.6);
+  position:relative;
+  z-index:5; /* above banner image */
+  text-align:center;
+}
+.simulador h2{background:linear-gradient(90deg,var(--gold),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:1.8rem;margin-bottom:8px}
+.simulador p{color:#eaeaea;margin-bottom:12px}
+.fields{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.fields select,.fields input{width:220px;padding:12px;border-radius:10px;border:1px solid rgba(255,215,0,0.06);background:#060606;color:var(--gold);text-align:center}
+.btn-calc{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 22px;border-radius:999px;cursor:pointer}
+.resultado{margin-top:12px;text-align:center;font-weight:700;color:#fff;font-size:1.05rem}
+
+/* CALCULADORA FGTS */
+.calculadora-fgts{
+  max-width:var(--maxwidth);
+  width:95%;
+  margin:28px auto;
+  background:linear-gradient(180deg,#0b0b0b,#070707);
+  border-radius:14px;
+  padding:36px;
+  border:1px solid rgba(255,215,0,0.08);
+  text-align:center;
+}
+.calculadora-fgts h2{background:linear-gradient(90deg,var(--gold),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:1.5rem;margin-bottom:8px}
+.calculadora-fgts p{color:#eaeaea;margin-bottom:12px}
+.calculadora-fgts .fgts-input{width:260px;padding:12px;border-radius:10px;border:1px solid rgba(255,215,0,0.06);background:#060606;color:var(--gold);text-align:center;margin:6px}
+
+/* QUEM SOMOS */
+.quemsomos{max-width:var(--maxwidth);margin:30px auto;padding:26px;background:#111;border-radius:14px;border:1px solid rgba(255,255,255,0.03);text-align:center}
+.quemsomos h2{color:var(--gold);margin-bottom:8px}
+.quemsomos p{color:#ddd;line-height:1.6;max-width:980px;margin:0 auto}
+
+/* SERVIÇOS */
+.container{max-width:1120px;margin:36px auto;padding:0 18px}
+.section{background:#111;border-radius:14px;padding:28px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 8px 30px rgba(0,0,0,0.6);margin-bottom:22px}
+.section h2{color:var(--gold);text-align:center;margin-bottom:10px}
+.servicos-grid{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:10px}
+.service-card{width:300px;background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,215,0,0.06);text-align:left;transition:transform .25s}
+.service-card:hover{transform:translateY(-6px)}
+.service-card h3{color:var(--gold);margin-bottom:8px}
+.subitems{color:#ddd;margin-left:8px}
+
+/* PARCEIROS (12 logos + duplicates for loop) */
+.parceiros-wrapper{max-width:var(--maxwidth);margin:36px auto;overflow:hidden;padding:6px 0;position:relative}
+.parceiros-track{display:flex;gap:36px;width:max-content;align-items:center;animation:scroll 28s linear infinite}
+.parceiros-track img{width:120px;height:auto;border-radius:8px;background:#fff;padding:8px;transition:transform .25s}
+.parceiros-track img:hover{transform:scale(1.05)}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* FAQ */
+.faq-grid{max-width:920px;margin:18px auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;background:#0f0f0f}
+.faq-item button{width:100%;background:#0f0f0f;color:var(--gold);border:none;padding:14px 16px;text-align:left;cursor:pointer;font-weight:700}
+.faq-resposta{max-height:0;overflow:hidden;background:#0d0d0d;padding:0 16px;color:#eaeaea;margin:0;transition:max-height .35s ease}
+.faq-item.active .faq-resposta{max-height:320px;padding:12px 16px}
+
+/* CONTATO */
+.contato{max-width:var(--maxwidth);margin:30px auto;text-align:center}
+.contact-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.info{background:#0d0d0d;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,215,0,0.06);display:flex;align-items:center;gap:12px;min-width:260px;justify-content:center}
+.info i{color:var(--gold);font-size:20px}
+.info a, .info span{color:var(--gold);font-weight:700;text-decoration:none}
+.socials{margin-top:12px;display:flex;gap:12px;justify-content:center}
+.socials a{color:var(--gold);font-size:20px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px}
+.socials a:hover{transform:scale(1.1)}
+
+/* WHATSAPP FIXO */
+#whats-fixo{position:fixed;bottom:22px;right:22px;background:linear-gradient(90deg,var(--accent),#0fbf5b);color:#fff;border-radius:50%;width:58px;height:58px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 30px rgba(0,0,0,0.4);z-index:9999}
+
+/* FOOTER */
+footer{margin-top:36px;padding:20px;text-align:center;color:#bbb;border-top:1px solid rgba(255,215,0,0.06)}
+
+/* RESPONSIVO */
+@media (max-width:900px){
+  .banner-text{margin-left:0;max-width:78%}
+  .simulador,.calculadora-fgts{padding:20px}
+}
+@media (max-width:768px){
+  .banner-area img.mulher{display:none} /* image hidden on mobile (option A) */
+  .banner-text{margin-left:0;text-align:center;padding:12px}
+  .contact-grid .info{width:100%}
+  .fields select,.fields input{width:100%}
+  .calculadora-fgts .fgts-input{width:100%}
+  .parceiros-track{gap:18px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" role="banner">
+  <div class="brand">
+    <div class="logo"><img src="logo.jpg" alt="Logo CREDCORE"></div>
+    <div style="text-align:left;">
+      <h1>CREDCORE</h1>
+      <div class="tag">Crédito fácil e seguro</div>
+    </div>
+  </div>
+</header>
+
+<!-- BANNER -->
+<section class="banner-area" aria-label="Banner principal">
+  <img src="banner.png" alt="Mulher apontando" class="mulher">
+  <div class="banner-text" aria-hidden="false">
+    <h2>Simule e conquiste o crédito que você precisa</h2>
+    <p>Empréstimos consignados, refinanciamento, portabilidade, FGTS e soluções para governos e prefeituras.</p>
+    <div class="cta-row">
+      <button class="btn-primary" onclick="document.getElementById('simulador').scrollIntoView({behavior:'smooth'})">Simular Agora</button>
+      <button class="whatsapp-icon" onclick="abrirWhats()"><i class="fa-brands fa-whatsapp"></i> Falar com Consultor</button>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULADOR -->
+<section class="simulador" id="simulador" aria-label="Simulador consignado">
+  <h2>Simulador de Empréstimo</h2>
+  <p>Escolha o tipo de crédito, informe o valor e o número de parcelas para estimar a parcela.</p>
+
+  <div class="fields" role="form" aria-label="Campos de simulação">
+    <select id="tipoCredito" aria-label="Tipo de crédito">
+      <option value="inss">INSS — 1,80% a.m. (até 96x)</option>
+      <option value="governo">Governo / Prefeitura — 2,80% a.m. (até 96x)</option>
+      <option value="clt">CLT — 3,55% a.m. (até 36x)</option>
+    </select>
+    <input type="number" id="valor" placeholder="Valor (R$)" min="0" step="0.01" aria-label="Valor desejado">
+    <input type="number" id="parcelas" placeholder="Parcelas" min="1" step="1" aria-label="Quantidade de parcelas">
+  </div>
+
+  <div style="text-align:center;">
+    <button class="btn-calc" onclick="simular()">Calcular</button>
+  </div>
+
+  <div class="resultado" id="resultado" role="status" aria-live="polite"></div>
+</section>
+
+<!-- CALCULADORA FGTS -->
+<section class="calculadora-fgts" aria-label="Calculadora FGTS">
+  <h2>Calculadora FGTS — Saque Aniversário / Antecipação</h2>
+  <p>Use a tabela do saque-aniversário para estimar o valor anual e simular a antecipação.</p>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:12px;">
+    <input class="fgts-input" id="saldoFgts" type="number" placeholder="Saldo FGTS (R$)" min="0" step="0.01" aria-label="Saldo FGTS">
+    <input class="fgts-input" id="anosAntecipar" type="number" placeholder="Anos a antecipar" min="1" step="1" value="1" aria-label="Anos a antecipar">
+    <input class="fgts-input" id="cetInput" type="number" placeholder="CET % a.m. (ex: 1.99)" min="0" step="0.01" value="1.99" aria-label="CET">
+  </div>
+
+  <div style="text-align:center;">
+    <button class="btn-calc" onclick="calcularFGTS()">Calcular FGTS</button>
+  </div>
+
+  <div class="resultado" id="resultadoFgts" role="status" aria-live="polite"></div>
+</section>
+
+<!-- QUEM SOMOS -->
+<section class="quemsomos" aria-label="Quem Somos">
+  <h2>Quem Somos</h2>
+  <p>A CREDCORE é especialista em crédito consignado para aposentados, pensionistas, servidores públicos, trabalhadores CLT e órgãos públicos. Atendimento humano, transparente e soluções sob medida para cada cliente — com foco em refinanciamento, portabilidade, FGTS e contratos para governos e prefeituras.</p>
+</section>
+
+<!-- SERVIÇOS -->
+<div class="container">
+  <section class="section" aria-label="Nossos Serviços">
+    <h2>Nossos Serviços</h2>
+    <div class="servicos-grid">
+      <div class="service-card"><h3>INSS</h3><ul class="subitems"><li>Margem Nova</li><li>Portabilidade</li><li>Refinanciamento</li><li>Cartão Consignado</li></ul></div>
+      <div class="service-card"><h3>BPC / LOAS</h3><ul class="subitems"><li>Atendimento especializado</li><li>Margem específica</li></ul></div>
+      <div class="service-card"><h3>FGTS</h3><p class="subitems">Antecipação do saque-aniversário, consultoria e simulação personalizada.</p></div>
+      <div class="service-card"><h3>Empréstimo CLT</h3><p class="subitems">Crédito rápido para trabalhadores com carteira assinada.</p></div>
+      <div class="service-card"><h3>Governos e Prefeituras</h3><ul class="subitems"><li>Margem nova</li><li>Cartão consignado</li><li>Projetos para órgãos públicos</li></ul></div>
+    </div>
+  </section>
+</div>
+
+<!-- PARCEIROS -->
+<div class="parceiros-wrapper" aria-label="Parceiros">
+  <div class="parceiros-track" id="parceirosTrack">
+    <img src="banco1.png" alt="Parceiro 1">
+    <img src="banco2.png" alt="Parceiro 2">
+    <img src="banco3.png" alt="Parceiro 3">
+    <img src="banco4.png" alt="Parceiro 4">
+    <img src="banco5.png" alt="Parceiro 5">
+    <img src="banco6.png" alt="Parceiro 6">
+    <img src="banco7.png" alt="Parceiro 7">
+    <img src="banco8.png" alt="Parceiro 8">
+    <img src="banco9.png" alt="Parceiro 9">
+    <img src="banco10.png" alt="Parceiro 10">
+    <img src="banco11.png" alt="Parceiro 11">
+    <img src="banco12.png" alt="Parceiro 12">
+    <!-- duplicated for smooth loop -->
+    <img src="banco1.png" alt="Parceiro 1">
+    <img src="banco2.png" alt="Parceiro 2">
+    <img src="banco3.png" alt="Parceiro 3">
+    <img src="banco4.png" alt="Parceiro 4">
+    <img src="banco5.png" alt="Parceiro 5">
+    <img src="banco6.png" alt="Parceiro 6">
+    <img src="banco7.png" alt="Parceiro 7">
+    <img src="banco8.png" alt="Parceiro 8">
+    <img src="banco9.png" alt="Parceiro 9">
+    <img src="banco10.png" alt="Parceiro 10">
+    <img src="banco11.png" alt="Parceiro 11">
+    <img src="banco12.png" alt="Parceiro 12">
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="container">
+  <section class="section" aria-label="Perguntas Frequentes">
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq-grid">
+      <div class="faq-item"><button onclick="toggleFAQ(this)">1️⃣ O que é o empréstimo consignado?</button><div class="faq-resposta">É uma modalidade de crédito em que as parcelas são descontadas diretamente do salário ou benefício. Por isso costuma ter taxas menores.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)">2️⃣ Quem pode contratar o consignado?</button><div class="faq-resposta">Aposentados e pensionistas do INSS, servidores públicos (federal, estadual e municipal), militares e trabalhadores CLT de empresas conveniadas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)">3️⃣ O que é margem consignável?</button><div class="faq-resposta">É o limite máximo da renda que pode ser comprometida com parcelas. Normalmente 35% para empréstimos e 5% exclusivos para cartão consignado.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)">4️⃣ Diferença entre refinanciamento e portabilidade?</button><div class="faq-resposta">Refinanciamento aumenta o prazo e pode liberar novo valor; portabilidade transfere o contrato para outra instituição (buscando melhores taxas).</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)">5️⃣ O que é o cartão consignado?</button><div class="faq-resposta">Cartão de crédito onde o valor mínimo da fatura é descontado automaticamente do salário ou benefício, com taxas reduzidas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)">6️⃣ Posso ter mais de um empréstimo consignado?</button><div class="faq-resposta">Sim, desde que exista margem disponível para assumir novas parcelas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)">7️⃣ Quanto tempo demora para o dinheiro cair?</button><div class="faq-resposta">Após aprovação e assinatura, normalmente o crédito é liberado entre 24 e 72 horas úteis (varia conforme instituição).</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)">8️⃣ Quais documentos são necessários?</button><div class="faq-resposta">RG/CNH, CPF, comprovante de residência e contracheque ou extrato do benefício atualizado.</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTATO -->
+<div class="container">
+  <section class="section contato" aria-label="Contato">
+    <h2>Fale Conosco</h2>
+    <div class="contact-grid" style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px;">
+      <div class="info"><i class="fa-solid fa-phone"></i><a href="tel:+5551995167469">+55 51 99516-7469</a></div>
+      <div class="info"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/5551995167469" target="_blank">WhatsApp</a></div>
+      <div class="info"><i class="fa-solid fa-envelope"></i><a href="mailto:Credcorefinanciamentos@gmail.com">Credcorefinanciamentos@gmail.com</a></div>
+      <div class="info"><i class="fa-solid fa-location-dot"></i><span>24 de maio 62, centro historico de porto alegre</span></div>
+    </div>
+
+    <div class="socials" aria-label="Redes sociais">
+      <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+      <a href="#" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+    </div>
+  </section>
+</div>
+
+<!-- WHATSAPP FIXO -->
+<a id="whats-fixo" href="https://wa.me/5551995167469?text=Ol%C3%A1!%20Quero%20uma%20simula%C3%A7%C3%A3o" target="_blank" aria-label="WhatsApp">
+  <i class="fa-brands fa-whatsapp" style="color:#fff;"></i>
+</a>
+
+<footer>© <span id="ano"></span> CREDCORE Financiamentos — Todos os direitos reservados</footer>
+
+<script>
+/* ano */
+document.getElementById('ano').innerText = new Date().getFullYear();
+
+/* abrir whatsapp */
+function abrirWhats(){ window.open('https://wa.me/5551995167469?text=Ol%C3%A1!%20Quero%20uma%20simula%C3%A7%C3%A3o','_blank'); }
+
+/* Simulador consignado (PRICE) */
+function simular(){
+  const tipo = document.getElementById('tipoCredito').value;
+  const v = parseFloat(document.getElementById('valor').value);
+  const p = parseInt(document.getElementById('parcelas').value);
+  const out = document.getElementById('resultado');
+  if(isNaN(v) || v <= 0 || isNaN(p) || p < 1){ out.innerText = 'Preencha Valor e Parcelas corretamente.'; return; }
+  let juros, maxParc, nome;
+  if(tipo === 'inss'){ juros = 0.018; maxParc = 96; nome='INSS'; }
+  else if(tipo === 'governo'){ juros = 0.028; maxParc = 96; nome='Governo / Prefeitura'; }
+  else { juros = 0.0355; maxParc = 36; nome='CLT'; }
+  if(p > maxParc){ out.innerHTML = `Número de parcelas excede o limite para <strong>${nome}</strong>. Máximo: ${maxParc}x.`; return; }
+  const parcela = (v * juros) / (1 - Math.pow(1 + juros, -p));
+  const total = parcela * p;
+  out.innerHTML = `Simulação: <strong>${nome}</strong><br>Taxa: <strong>${(juros*100).toFixed(2)}% a.m.</strong><br>Parcela estimada: <strong>R$ ${parcela.toFixed(2)}</strong> • ${p}x<br>Total a pagar: <strong>R$ ${total.toFixed(2)}</strong>`;
+}
+
+/* Calculadora FGTS (tabela saque-aniversário + CET editável) */
+function calcularFGTS(){
+  const saldo = parseFloat(document.getElementById('saldoFgts').value);
+  const anos = parseInt(document.getElementById('anosAntecipar').value);
+  const cetInput = parseFloat(document.getElementById('cetInput').value);
+  const out = document.getElementById('resultadoFgts');
+  if(isNaN(saldo) || saldo <= 0 || isNaN(anos) || anos < 1 || isNaN(cetInput) || cetInput < 0){ out.innerText = 'Preencha todos os campos corretamente.'; return; }
+  let aliquota = 0, adicional = 0;
+  if (saldo <= 500) { aliquota = 0.50; adicional = 0; }
+  else if (saldo <= 1000) { aliquota = 0.40; adicional = 50; }
+  else if (saldo <= 5000) { aliquota = 0.30; adicional = 150; }
+  else if (saldo <= 10000) { aliquota = 0.20; adicional = 650; }
+  else if (saldo <= 15000) { aliquota = 0.15; adicional = 1150; }
+  else if (saldo <= 20000) { aliquota = 0.10; adicional = 1900; }
+  else { aliquota = 0.05; adicional = 2900; }
+  const saqueAnual = saldo * aliquota + adicional;
+  const valorAntecipado = saqueAnual * anos;
+  const cetMensal = cetInput / 100;
+  const meses = anos * 12;
+  let parcelaMensal = 0, totalPago = 0;
+  if(cetMensal === 0){ parcelaMensal = valorAntecipado / meses; totalPago = valorAntecipado; }
+  else { parcelaMensal = (valorAntecipado * cetMensal) / (1 - Math.pow(1 + cetMensal, -meses)); totalPago = parcelaMensal * meses; }
+  out.innerHTML = `Saque anual (tabela): <strong>R$ ${saqueAnual.toFixed(2)}</strong><br>Valor antecipado (${anos} ano(s)): <strong>R$ ${valorAntecipado.toFixed(2)}</strong><br>CET usado na simulação: <strong>${cetInput.toFixed(2)}% a.m.</strong><br>Parcela mensal estimada: <strong>R$ ${parcelaMensal.toFixed(2)}</strong> • ${meses}x<br>Total a pagar (com CET): <strong>R$ ${totalPago.toFixed(2)}</strong>`;
+}
+
+/* FAQ toggle (abre só 1) */
+function toggleFAQ(btn){
+  const item = btn.parentElement;
+  document.querySelectorAll('.faq-item').forEach(f => { if(f !== item) f.classList.remove('active'); });
+  item.classList.toggle('active');
+}
+
+/* Pausa parceiros on hover */
+const track = document.getElementById('parceirosTrack');
+if(track){
+  track.addEventListener('mouseenter', ()=> track.style.animationPlayState = 'paused');
+  track.addEventListener('mouseleave', ()=> track.style.animationPlayState = 'running');
+}
+</script>
+</body>
+</html>
