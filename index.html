@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CREDCORE Financiamentos</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --gold:#ffd700;
+  --bg:#000;
+  --accent:#25d366;
+  --card:#0d0d0d;
+  --muted:#cfcfcf;
+  --maxwidth:1200px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:'Poppins',sans-serif;
+}
+
+html,body{height:100%}
+body{
+  background:
+    linear-gradient(
+      rgba(0,0,0,.85),
+      rgba(0,0,0,.85)
+    ),
+    url('portoalegre.jpg');
+
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+
+  color:#fff;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* HEADER */
+.header{
+  width:100%;
+  background:linear-gradient(180deg,#000,#080808);
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  box-shadow:0 6px 30px rgba(0,0,0,0.6);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:70px;height:70px;border-radius:12px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,215,0,0.06)}
+.logo img{width:100%;height:100%;object-fit:cover}
+.header h1{color:#fff;font-size:1.4rem;margin:0}
+.header .tag{color:var(--muted);font-size:0.85rem}
+
+/* MENU HORIZONTAL AO LADO DO LOGO */
+.header .brand{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--maxwidth);
+}
+
+.menu ul{
+  display: flex;
+  list-style: none;
+  gap: 28px;
+}
+
+.menu ul li a{
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.menu ul li a:hover{
+  color: var(--gold);
+}
+
+/* RESPONSIVO */
+@media(max-width:900px){
+  .menu ul{
+    flex-direction: column;
+    gap: 16px;
+    background: #0b0b0b;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    padding: 16px;
+    display: none;
+    border-radius: 8px;
+  }
+  .menu ul.show{
+    display: flex;
+  }
+  .header .brand{
+    justify-content: space-between;
+  }
+}
+
+@keyframes floaty{0%{transform:translateY(0) scaleX(-1);}100%{transform:translateY(-8px) scaleX(-1);}}
+.banner-text{
+  position:relative;
+  z-index:2;
+  margin-left:48%;
+  max-width:480px;
+  text-align:left;
+}
+.banner-text h2{
+  background:linear-gradient(90deg,var(--gold),#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-size:2.2rem;
+  margin-bottom:10px;
+  font-weight:700;
+}
+.banner-text p{color:#eaeaea;font-size:1rem;margin-bottom:16px;line-height:1.5}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{
+    width:100%;
+    height:68px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        90deg,
+        #ffd700,
+        #ffea70
+    );
+
+    color:#000;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 12px 30px rgba(255,215,0,.35);
+
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.05);
+}
+
+/* SIMULADOR (aligned under banner, border touches banner) */
+.simulador{
+max-width:1180px;
+width:80%;
+margin:20px auto;
+padding:45px;
+background:#0d0d0d;
+border-radius:28px;
+border:1px solid rgba(255,215,0,.15);
+position:relative;
+overflow:hidden;
+transition:.3s;
+}
+
+.simulador h2{
+
+font-size:34px;
+
+font-weight:800;
+
+margin-bottom:12px;
+
+background:linear-gradient(
+90deg,
+#FFD700,
+#FFF);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+.simulador p{color:#eaeaea;margin-bottom:12px}
+
+.fields{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:18px;
+
+margin-top:25px;
+
+margin-bottom:25px;
+
+}
+.fields input,
+.fields select{
+
+width:100%;
+
+height:58px;
+
+background:#0d0d0d;
+
+border:1px solid rgba(255,215,0,.18);
+
+border-radius:16px;
+
+padding:0 18px;
+
+color:#ffffff;
+
+font-size:16px;
+
+transition:.30s;
+
+}
+
+.fields input:focus,
+.fields select:focus{
+
+outline:none;
+
+border-color:#FFD700;
+
+box-shadow:0 0 18px rgba(255,215,0,.18);
+
+}
+
+.btn-calc{
+
+width:260px;
+
+height:58px;
+
+border:none;
+
+border-radius:18px;
+
+background:linear-gradient(
+135deg,
+#FFD700,
+#F6C000);
+
+color:#000;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.30s;
+
+}
+
+.btn-calc:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+
+0 15px 35px rgba(255,215,0,.35);
+
+}
+.resultado{margin-top:12px;text-align:center;font-weight:700;color:#fff;font-size:1.05rem}
+
+
+/* QUEM SOMOS */
+.quemsomos{max-width:var(--maxwidth);margin:30px auto;padding:26px;background:#111;border-radius:14px;border:1px solid rgba(255,255,255,0.03);text-align:center}
+.quemsomos h2{color:var(--gold);margin-bottom:8px}
+.quemsomos p{color:#ddd;line-height:1.6;max-width:980px;margin:0 auto}
+
+/* SERVIÇOS */
+.container{max-width:1120px;margin:36px auto;padding:0 18px}
+.section{background:#111;border-radius:14px;padding:28px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 8px 30px rgba(0,0,0,0.6);margin-bottom:22px}
+.section h2{color:var(--gold);text-align:center;margin-bottom:10px}
+.servicos-grid{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:10px}
+.service-card{width:300px;background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,215,0,0.06);text-align:left;transition:transform .25s}
+.service-card:hover{transform:translateY(-6px)}
+.service-card h3{color:var(--gold);margin-bottom:8px}
+.subitems{color:#ddd;margin-left:8px}
+
+/* PARCEIROS (12 logos + duplicates for loop) */
+.parceiros-wrapper{
+    width:100%;
+    max-width:100%;
+    margin:36px 0;
+    overflow:hidden;
+    padding:6px 0;
+    position:relative;
+}
+.parceiros-track{
+    display:flex;
+    width:max-content;
+    gap:36px;
+    align-items:center;
+    animation:scroll 30s linear infinite;
+}
+.parceiros-track img{width:120px;height:auto;border-radius:8px;background:#fff;padding:8px;transition:transform .25s}
+.parceiros-track img:hover{transform:scale(1.05)}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* FAQ */
+.faq-grid{max-width:920px;margin:18px auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;background:#0f0f0f}
+.faq-item button{
+  width:100%;
+  background:#0f0f0f;
+  color:#fff;
+  padding:16px;
+  border:none;
+  text-align:left;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.faq-resposta{
+  max-height:0;
+  overflow:hidden;
+  background:#0d0d0d;
+  padding:0 16px;
+  color:#fff;
+  margin:0;
+  transition:max-height .35s ease;
+}
+
+.faq-item.active .faq-resposta{max-height:320px;padding:12px 16px}
+
+/* CONTATO */
+.contato{max-width:var(--maxwidth);margin:30px auto;text-align:center}
+.contact-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.info{background:#0d0d0d;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,215,0,0.06);display:flex;align-items:center;gap:12px;min-width:260px;justify-content:center}
+.info i{color:var(--gold);font-size:20px}
+.info a, .info span{color:var(--gold);font-weight:700;text-decoration:none}
+.socials{margin-top:12px;display:flex;gap:12px;justify-content:center}
+.socials a{color:var(--gold);font-size:20px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px}
+.socials a:hover{transform:scale(1.1)}
+
+/* WHATSAPP FIXO */
+#whats-fixo{position:fixed;bottom:22px;right:22px;background:linear-gradient(90deg,var(--accent),#0fbf5b);color:#fff;border-radius:50%;width:58px;height:58px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 30px rgba(0,0,0,0.4);z-index:9999}
+
+/* FOOTER */
+footer{margin-top:36px;padding:20px;text-align:center;color:#bbb;border-top:1px solid rgba(255,215,0,0.06)
+}
+
+/* RESPONSIVO */
+@media (max-width:900px){
+  .banner-text{margin-left:0;max-width:78%}
+  .simulador,.calculadora-fgts{padding:20px}
+}
+
+@media (max-width:768px){
+  .banner-area img.mulher{display:none} /* image hidden on mobile (option A) */
+  .banner-text{margin-left:0;text-align:center;padding:12px}
+  .contact-grid .info{width:100%}
+  .fields select,.fields input{width:100%}
+  .parceiros-track{gap:18px}
+}
+
+/* Linha decorativa no topo */
+.simulador::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:5px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+
+/* ÍCONE DO SIMULADOR */
+.sim-sub{
+
+font-size:17px;
+
+color:#bdbdbd;
+
+margin-bottom:30px;
+
+}
+
+/* SUBTÍTULO */
+.sim-sub{
+  font-size:0.9rem;
+  color:#cfcfcf;
+  margin-bottom:14px;
+}
+
+/* EFEITO HOVER */
+.simulador:hover{
+  transform:translateY(-4px);
+  transition:0.3s;
+  box-shadow:0 25px 60px rgba(0,0,0,0.7);
+}
+.menu-toggle{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
+  color:#fff;
+}
+
+@media(max-width:900px){
+  .menu-toggle{
+    display:block;
+  }
+}
+
+/* ===== CONTATO CREDCORE (FORÇADO) ===== */
+
+#contato{
+  max-width:1100px !important;
+  margin:70px auto !important;
+  padding:40px 20px !important;
+  text-align:center !important;
+}
+
+#contato h2{
+  color:#ffd700 !important;
+  font-size:2.1rem !important;
+  margin-bottom:10px !important;
+}
+
+#contato p{
+  color:#cfcfcf !important;
+  font-size:1rem !important;
+}
+
+#contato .contato-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr)) !important;
+  gap:26px !important;
+  margin-top:35px !important;
+}
+
+#contato .contato-card{
+  background:linear-gradient(180deg,#0b0b0b,#020202) !important;
+  border:1px solid rgba(255,215,0,0.25) !important;
+  border-radius:20px !important;
+  padding:30px 22px !important;
+  box-shadow:0 15px 45px rgba(0,0,0,0.8) !important;
+  transition:all .3s ease !important;
+}
+
+#contato .contato-card:hover{
+  transform:translateY(-8px) !important;
+  box-shadow:0 22px 60px rgba(255,215,0,0.35) !important;
+}
+
+#contato .contato-card i{
+  font-size:44px !important;
+  color:#ffd700 !important;
+  margin-bottom:14px !important;
+}
+
+#contato .contato-card h3{
+  color:#ffffff !important;
+  font-size:1.15rem !important;
+  margin-bottom:14px !important;
+}
+
+#contato .contato-btn{
+  display:block !important;
+  margin:10px auto !important;
+  padding:14px 18px !important;
+  border-radius:999px !important;
+  background:linear-gradient(90deg,#ffd700,#ffea70) !important;
+  color:#000 !important;
+  font-weight:700 !important;
+  text-decoration:none !important;
+  box-shadow:0 8px 25px rgba(255,215,0,0.45) !important;
+  transition:all .25s ease !important;
+}
+
+#contato .contato-btn:hover{
+  transform:scale(1.06) !important;
+  filter:brightness(1.12) !important;
+}
+
+/* ===== FORÇA COR AMARELA NO CONTATO (ANTI-AZUL) ===== */
+/* Título principal continua amarelo */
+#contato h2{
+  color:#ffd700 !important;
+}
+
+/* Texto e nomes dos canais ficam brancos */
+#contato p,
+#contato h3{
+  color:#ffffff !important;
+}
+
+/* Ícones ficam brancos */
+#contato .contato-card i{
+  color:#ffffff !important;
+}
+
+/* Links normais ficam brancos */
+#contato a{
+  color:#ffffff !important;
+  text-decoration:none !important;
+}
+
+.banner-area::before{
+content:'';
+position:absolute;inset:0;
+background:radial-gradient(circle at 28% 50%,rgba(255,215,0,.18),transparent 35%);
+z-index:0;
+}
+.banner-area img.mulher{z-index:2;height:96%;}
+.banner-text{background:rgba(0,0,0,.28);backdrop-filter:blur(4px);padding:24px;border-radius:18px;}
+
+.footer{
+    background:#050505;
+    border-top:1px solid rgba(255,215,0,.15);
+    margin-top:60px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+    display:grid;
+    grid-template-columns: 1.2fr .8fr 1.2fr;
+    gap:40px;
+    align-items:start;
+
+}
+
+.footer-col:nth-child(2){
+    text-align:left;
+}
+
+.footer-col{
+    flex:1;
+    min-width:250px;
+    text-align:left;
+}
+
+.footer-col h4{
+    color:#ffffff;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.footer-col p{
+    color:#bdbdbd;
+    font-size:13px;
+    line-height:2.2;
+    margin-bottom:12px;
+}
+
+.footer-col a{
+    display:block;
+    color:#bdbdbd;
+    text-decoration:none;
+    margin-bottom:8px;
+    font-size:13px;
+}
+
+.footer-col a:hover{
+    color:#FFD700;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.08);
+    text-align:center;
+    padding:15px;
+    font-size:11px;
+    color:#9e9e9e;
+}
+
+.banner-area{
+    margin-bottom:-20px;
+
+    position:relative;
+
+    height:570px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding-right:8%;
+
+    overflow:visible;
+
+    background:url("banner-principal.png") center center;
+
+    background-size:cover;
+
+    background-repeat:no-repeat;
+
+}
+
+.banner-area:before{
+    content:'';
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 25% 50%,rgba(255,215,0,.18),transparent 45%);
+
+    z-index:0;
+}
+
+.hero-card{
+    position:relative;
+    z-index:3;
+
+    width:520px;
+    max-width:100%;
+
+    margin-right:6%;
+
+    background:transparent;
+
+    border:none;
+
+    box-shadow:none;
+
+    backdrop-filter:none;
+
+    padding:0;
+}
+
+.hero-top{
+    color:#ffd700;
+    font-size:.82rem;
+}
+
+.hero-card h1{
+    font-size:54px;
+    line-height:58px;
+    font-weight:800;
+    margin:15px 0;
+}
+
+.hero-card h1 span{
+
+background:none;
+
+color:#ffffff;
+
+-webkit-text-fill-color:#ffffff;
+
+text-shadow:none;
+
+}
+
+.hero-card h3{
+    font-size:20px;
+    color:#FFD700;
+    font-weight:600;
+    margin:18px 0 20px;
+}
+
+.hero-list{
+    margin:15px 0;
+}
+
+.hero-list li{
+    margin:10px 0;
+    font-size:17px;
+    color:#f2f2f2;
+    list-style:none;
+}
+
+
+.hero-premium{
+height:760px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+max-width:1200px;
+margin:0 auto;
+padding:40px 20px;
+position:relative;
+z-index:2;
+
+}
+.hero-card-premium{
+width:520px;
+background:rgba(0,0,0,.82);
+border:2px solid rgba(255,215,0,.55);
+border-radius:28px;
+padding:45px;
+box-shadow:0 0 40px rgba(255,215,0,.15);
+}
+.hero-card-premium h1{font-size:64px;line-height:1}
+.hero-card-premium h1 span{
+background:linear-gradient(180deg,#fff7b3,#ffd700,#ffb700,#fff1a0);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* BOTÃO NOVO DO BANNER */
+
+.btn-banner{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:300px;
+
+    height:58px;
+
+    border-radius:18px;
+
+    text-decoration:none;
+
+    background:linear-gradient(135deg,#FFD700,#F5C400);
+
+    color:#ffffff;
+
+    font-size:19px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    border:2px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 15px 35px rgba(255,215,0,.35);
+
+    transition:.35s ease;
+}
+
+.btn-banner:hover{
+
+    transform:translateY(-4px) scale(1.03);
+
+    box-shadow:
+        0 22px 45px rgba(255,215,0,.50);
+
+    filter:brightness(1.08);
+
+}
+
+
+/* MELHORIAS RESPONSIVAS AUTOMÁTICAS */
+.menu{position:relative;}
+
+@media(max-width:900px){
+  .fields{
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media(max-width:768px){
+  .footer-container{
+    grid-template-columns:1fr !important;
+    text-align:left !important;
+  }
+
+  .footer-col,
+  .footer-col:nth-child(2){
+    text-align:center !important;
+  }
+
+  .banner-area{
+    height:auto !important;
+    min-height:500px !important;
+    padding:40px 20px !important;
+  }
+
+  .hero-card{
+    width:100% !important;
+    margin-right:0 !important;
+  }
+
+  .logo{
+    width:55px !important;
+    height:55px !important;
+  }
+
+  .header h1{
+    font-size:1.1rem !important;
+  }
+
+  .simulador{
+    width:95% !important;
+    padding:20px !important;
+  }
+}
+
+@media(max-width:1200px){
+  .hero-card{
+    width:450px;
+    margin-right:0;
+  }
+}
+
+
+.footer-whats{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(90deg,#25d366,#1db954);
+    color:#fff !important;
+    padding:12px 20px;
+    border-radius:999px;
+    font-weight:700;
+    margin-top:15px;
+    transition:.3s;
+}
+.footer-whats:hover{transform:translateY(-3px);}
+
+
+.fintech-seals{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:20px;
+}
+
+.fintech-seal{
+padding:10px 14px;
+border:1px solid rgba(255,215,0,.25);
+border-radius:12px;
+background:#0a0a0a;
+font-size:12px;
+color:#eaeaea;
+}
+
+.footer-policy{
+margin-top:18px;
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.footer-policy a{
+font-size:12px;
+color:#cfcfcf !important;
+}
+
+.footer-bottom{
+line-height:1.8;
+}
+
+.servicos-premium{
+background:
+linear-gradient(
+180deg,
+#0d0d0d,
+#050505
+);
+border:1px solid rgba(255,215,0,.15);
+}
+
+.titulo-servicos{
+text-align:center;
+margin-bottom:40px;
+}
+
+.titulo-servicos span{
+color:#FFD700;
+font-size:12px;
+letter-spacing:3px;
+font-weight:700;
+}
+
+.titulo-servicos h2{
+font-size:42px;
+margin-top:10px;
+margin-bottom:12px;
+font-weight:800;
+}
+
+.titulo-servicos p{
+max-width:700px;
+margin:auto;
+color:#cfcfcf;
+}
+
+.servicos-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.service-card{
+background:linear-gradient(
+180deg,
+#121212,
+#060606
+);
+border:1px solid rgba(255,215,0,.15);
+border-radius:22px;
+padding:30px;
+text-align:left;
+transition:.35s;
+}
+
+.service-card:hover{
+transform:translateY(-8px);
+box-shadow:
+0 20px 40px rgba(255,215,0,.18);
+border-color:#FFD700;
+}
+
+.service-card i{
+font-size:42px;
+color:#FFD700;
+margin-bottom:20px;
+}
+
+.service-card h3{
+font-size:19px;
+margin-bottom:12px;
+color:#fff;
+}
+
+.service-card p{
+color:#cfcfcf;
+line-height:1.6;
+}
+
+</style>
+</head>
+<body>
+
+<!-- PAINEL INTERNO CREDCORE -->
+<section class="simulador" id="painelAdmin" style="display:none">
+  <h2>Painel Interno — CREDCORE</h2>
+
+  <div class="fields">
+    <input type="text" id="adminCpf" placeholder="CPF do cliente">
+    <input type="text" id="adminProtocolo" placeholder="Protocolo">
+  </div>
+
+  <div class="fields">
+    <select id="adminStatus">
+      <option>Recebida</option>
+      <option>Em análise</option>
+      <option>Pendente documentação</option>
+      <option>Aprovada</option>
+      <option>Contrato assinado</option>
+      <option>Pago</option>
+      <option>Recusada</option>
+    </select>
+  </div>
+
+  <textarea id="adminMensagem" placeholder="Mensagem para o cliente"
+    style="width:100%;padding:12px;border-radius:10px;background:#060606;color:#ffd700;border:1px solid rgba(255,215,0,0.1);min-height:90px"></textarea>
+
+  <br><br>
+ 
+
+  <div class="resultado" id="resultadoAdmin"></div>
+</section>
+
+<!-- HEADER -->
+<header class="header" role="banner">
+  <div class="brand">
+    <!-- LOGO -->
+    <div class="logo">
+    <img src="logo.jpg" alt="Logo CREDCORE">
+   
+
+    </div>
+
+    <!-- SLOGAN -->
+    <div class="logo-text">
+      <h1>CREDCORE</h1>
+      <div class="tag">Crédito fácil e seguro</div>
+    </div>
+
+    <!-- MENU -->
+    <nav class="menu">
+    <div class="menu-toggle">☰</div>
+      <ul>
+        <li><a href="#prefeituraPOA">Prefeitura de Porto Alegre</a></li>
+        <li><a href="#simulador">Simuladores</a></li>
+        <li><a href="#quemsomos">Quem Somos</a></li>
+        <li><a href="#servicos">Nossos Serviços</a></li>
+        <li><a href="#contato">Entre em Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<!-- BANNER -->
+<section class="banner-area" id="inicio">
+<div class="hero-glow"></div>
+<div class="hero-card">
+<span class="hero-top">CRÉDITO FÁCIL E SEGURO</span>
+<h1>EMPRÉSTIMO<br><span>CONSIGNADO</span></h1>
+<h3>INSS • PREFEITURA DE PORTO ALEGRE</h3>
+<ul class="hero-list">
+<li>✔ Taxas competitivas</li>
+<li>✔ Atendimento humanizado</li>
+<li>✔ Liberação rápida</li>
+<li>✔ Segurança e transparência</li>
+</ul>
+<div class="cta-row">
+
+<a href="#simulador" class="btn-banner">
+
+<i class="fa-solid fa-arrow-right"></i>
+&nbsp;
+SIMULAR AGORA
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="simulador" id="prefeituraPOA">
+<div class="sim-icon">
+<i class="fa-solid fa-building-columns"></i>
+</div>
+
+<h2>
+Servidores da Prefeitura de Porto Alegre
+</h2>
+
+<div class="sim-sub">
+Consulte sua margem consignável com nossa equipe especializada.
+</div>
+
+<p>
+Atendimento exclusivo para servidores municipais.
+Verifique sua margem disponível para empréstimo consignado,
+portabilidade e refinanciamento.
+</p>
+
+<div class="fields">
+
+<input
+type="text"
+id="nomePOA"
+placeholder="Nome completo">
+
+<input
+type="text"
+id="cpfPOA"
+placeholder="CPF">
+
+<input
+type="text"
+id="matriculaPOA"
+placeholder="Matrícula funcional">
+
+</div>
+
+<div style="text-align:center;">
+
+<button
+class="btn-calc"
+onclick="consultarMargemPOA()">
+
+Consultar minha margem
+
+</button>
+
+</div>
+
+<div
+class="resultado"
+id="resultadoPOA">
+</div>
+
+<small style="display:block;margin-top:8px;color:#bbb;font-size:0.75rem">
+
+Consulta realizada pela equipe CREDCORE.
+Sujeita à validação das informações fornecidas.
+
+</small>
+
+</section>
+
+<!-- SIMULADOR -->
+<section class="simulador" id="simulador" aria-label="Simulador consignado">
+  <h2>Simulador de Empréstimo</h2>
+
+<div class="sim-sub">Simulação rápida de empréstimo consignado</div>
+  <p>Escolha o tipo de crédito, informe o valor e o número de parcelas para estimar a parcela.</p>
+
+  <div class="fields" role="form" aria-label="Campos de simulação">
+    <select id="tipoCredito" aria-label="Tipo de crédito">
+      <option value="inss">INSS — 1,80% a.m. (até 96x)</option>
+      <option value="governo">Governo / Prefeitura — 2,80% a.m. (até 96x)</option>
+      <option value="clt">CLT — 3,55% a.m. (até 36x)</option>
+    </select>
+    <input type="number" id="valor" placeholder="Valor (R$)" min="0" step="0.01" aria-label="Valor desejado">
+    <input type="number" id="parcelas" placeholder="Parcelas" min="1" step="1" aria-label="Quantidade de parcelas">
+  </div>
+
+  <div style="text-align:center;">
+    <button class="btn-calc" onclick="simular()">Calcular</button>
+  </div>
+
+  <div class="resultado" id="resultado" role="status" aria-live="polite"></div>
+<small style="display:block;margin-top:8px;color:#bbb;font-size:0.75rem">
+Valores estimados. Taxas e condições sujeitas à análise de crédito e convênio com a instituição financeira.
+</small>
+</section>
+
+<section class="simulador" id="simulador-portabilidade" aria-label="Simulador de Portabilidade e Refinanciamento">
+  <h2>Simulador de Portabilidade e Refinanciamento</h2>
+  <p>Compare seu contrato atual com as taxas do consignado e veja se vale a pena trocar ou refinanciar.</p>
+
+  <div class="fields">
+    <select id="tipoOperacao">
+      <option value="portabilidade">Portabilidade (reduzir juros)</option>
+      <option value="refinanciamento">Refinanciamento (novo prazo)</option>
+    </select>
+
+    <input type="number" id="saldoDevedor" placeholder="Saldo devedor atual (R$)" min="0" step="0.01">
+    <input type="number" id="taxaAtual" placeholder="Taxa atual % a.m." value="1.80" min="0" step="0.01">
+    <input type="number" id="taxaNova" placeholder="Nova taxa % a.m." value="1.60" min="0" step="0.01">
+    <input type="number" id="parcelasRestantes" placeholder="Parcelas restantes" min="1" step="1">
+    <input type="number" id="parcelasNovas" placeholder="Novas parcelas" min="1" step="1">
+  </div>
+
+  <div style="text-align:center;">
+    <button class="btn-calc" onclick="simularPortabilidade()">Calcular</button>
+  </div>
+
+  <div class="resultado" id="resultadoPortabilidade"></div>
+
+  <small style="display:block;margin-top:8px;color:#bbb;font-size:0.75rem">
+    Simulação estimada com base nas taxas atuais do consignado. Condições sujeitas à análise de crédito e política da instituição.
+  </small>
+</section>
+
+<!-- QUEM SOMOS -->
+<section class="quemsomos" id="quemsomos">
+  <h2>Quem Somos</h2>
+  <p>A CREDCORE é especialista em crédito consignado para aposentados, pensionistas, servidores públicos, trabalhadores CLT e órgãos públicos. Atendimento humano, transparente e soluções sob medida para cada cliente — com foco em refinanciamento, portabilidade, FGTS e contratos para governos e prefeituras.</p>
+</section>
+
+
+
+<!-- PARCEIROS -->
+<div class="parceiros-wrapper" aria-label="Parceiros">
+  <div class="parceiros-track" id="parceirosTrack">
+    <img src="banco1.png" alt="Parceiro 1">
+    <img src="banco2.png" alt="Parceiro 2">
+    <img src="banco3.png" alt="Parceiro 3">
+    <img src="banco4.png" alt="Parceiro 4">
+    <img src="banco5.png" alt="Parceiro 5">
+    <img src="banco6.png" alt="Parceiro 6">
+    <img src="banco7.png" alt="Parceiro 7">
+    <img src="banco8.png" alt="Parceiro 8">
+    <img src="banco9.png" alt="Parceiro 9">
+    <img src="banco10.png" alt="Parceiro 10">
+    <img src="banco11.png" alt="Parceiro 11">
+    <img src="banco12.png" alt="Parceiro 12">
+    <!-- duplicated for smooth loop -->
+    <img src="banco1.png" alt="Parceiro 1">
+    <img src="banco2.png" alt="Parceiro 2">
+    <img src="banco3.png" alt="Parceiro 3">
+    <img src="banco4.png" alt="Parceiro 4">
+    <img src="banco5.png" alt="Parceiro 5">
+    <img src="banco6.png" alt="Parceiro 6">
+    <img src="banco7.png" alt="Parceiro 7">
+    <img src="banco8.png" alt="Parceiro 8">
+    <img src="banco9.png" alt="Parceiro 9">
+    <img src="banco10.png" alt="Parceiro 10">
+    <img src="banco11.png" alt="Parceiro 11">
+    <img src="banco12.png" alt="Parceiro 12">
+  </div>
+</div>
+
+<!-- NOSSOS SERVIÇOS -->
+<div class="container" id="servicos">
+
+<section class="section servicos-premium">
+
+<div class="titulo-servicos">
+<span>NOSSAS SOLUÇÕES</span>
+<h2>Crédito Inteligente Para Cada Necessidade</h2>
+<p>
+Atendimento especializado com análise rápida, segurança
+e as melhores condições para você.
+</p>
+</div>
+
+<div class="servicos-grid">
+
+<div class="service-card">
+<i class="fa-solid fa-user-check"></i>
+<h3>INSS</h3>
+<p>
+Crédito consignado para aposentados e pensionistas
+com taxas reduzidas e aprovação simplificada.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-building-columns"></i>
+<h3>Prefeitura de Porto Alegre</h3>
+<p>
+Atendimento especializado para servidores municipais.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-briefcase"></i>
+<h3>CLT</h3>
+<p>
+Antecipação e crédito para trabalhadores com carteira assinada.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-right-left"></i>
+<h3>Portabilidade</h3>
+<p>
+Transfira seu contrato para reduzir juros e economizar.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-rotate"></i>
+<h3>Refinanciamento</h3>
+<p>
+Renegocie seu contrato e libere novo valor.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-money-bill-trend-up"></i>
+<h3>FGTS</h3>
+<p>
+Antecipação do Saque-Aniversário com liberação rápida.
+</p>
+</div>
+
+</div>
+
+</section>
+</div>
+
+
+<!-- FAQ -->
+<div class="container">
+  <section class="section" aria-label="Perguntas Frequentes">
+    <h2>Perguntas Frequentes</h2>
+    <div class="faq-grid">
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> O que é o empréstimo consignado?</button><div class="faq-resposta">É uma modalidade de crédito em que as parcelas são descontadas diretamente do salário ou benefício. Por isso costuma ter taxas menores.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Quem pode contratar o consignado?</button><div class="faq-resposta">Aposentados e pensionistas do INSS, servidores públicos (federal, estadual e municipal), militares e trabalhadores CLT de empresas conveniadas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> O que é margem consignável?</button><div class="faq-resposta">É o limite máximo da renda que pode ser comprometida com parcelas. Normalmente 35% para empréstimos e 5% exclusivos para cartão consignado.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Diferença entre refinanciamento e portabilidade?</button><div class="faq-resposta">Refinanciamento aumenta o prazo e pode liberar novo valor; portabilidade transfere o contrato para outra instituição (buscando melhores taxas).</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> O que é o cartão consignado?</button><div class="faq-resposta">Cartão de crédito onde o valor mínimo da fatura é descontado automaticamente do salário ou benefício, com taxas reduzidas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Posso ter mais de um empréstimo consignado?</button><div class="faq-resposta">Sim, desde que exista margem disponível para assumir novas parcelas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Quanto tempo demora para o dinheiro cair?</button><div class="faq-resposta">Após aprovação e assinatura, normalmente o crédito é liberado entre 24 e 72 horas úteis (varia conforme instituição).</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Quais documentos são necessários?</button><div class="faq-resposta">RG/CNH, CPF, comprovante de residência e contracheque ou extrato do benefício atualizado.</div></div>
+    </div>
+  </section>
+</div>
+
+
+<!-- CONTATO -->
+<section id="contato">
+  <h2>Entre em Contato</h2>
+  <p>Fale com a equipe da CREDCORE e tire suas dúvidas.</p>
+
+  <div class="contato-grid">
+
+    <div class="contato-card">
+      <i class="fa-solid fa-phone"></i>
+      <h3>WhatsApp</h3>
+      <a class="contato-btn" href="https://wa.me/5551989181267" target="_blank">Falar agora</a>
+    </div>
+
+    <div class="contato-card">
+      <i class="fa-solid fa-envelope"></i>
+      <h3>E-mail</h3>
+      <a class="contato-btn" href="mailto:atendimento@credcorefinanciamentos.com.br">Enviar E-mail</a>
+    </div>
+
+    <div class="contato-card">
+      <i class="fa-brands fa-instagram"></i>
+      <h3>Instagram</h3>
+      <a class="contato-btn" href="https://www.instagram.com/credcorefinanciamentos/" target="_blank">Acessar Perfil</a>
+    </div>
+
+    <div class="contato-card">
+      <i class="fa-brands fa-facebook"></i>
+      <h3>Facebook</h3>
+      <a class="contato-btn" href="https://www.facebook.com/people/Credcore-Financiamentos/61591404437825/" target="_blank">Acessar Página</a>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- WHATSAPP FIXO -->
+<a id="whats-fixo" href="https://wa.me/5551995167469" target="_blank">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+
+
+<footer class="footer">
+
+<div class="footer-container">
+
+<div class="footer-col">
+<h4>CREDCORE FINANCIAMENTOS</h4>
+
+<p>
+Soluções financeiras com transparência, segurança e atendimento especializado para aposentados, pensionistas, servidores públicos e trabalhadores CLT.
+</p>
+
+<div class="fintech-seals">
+<div class="fintech-seal">🔒 Site Seguro SSL</div>
+<div class="fintech-seal">🛡️ Proteção LGPD</div>
+<div class="fintech-seal">✅ Atendimento Verificado</div>
+</div>
+
+<a href="https://wa.me/5551989181267" class="footer-whats">
+<i class="fa-brands fa-whatsapp"></i>
+Falar com Especialista
+</a>
+
+</div>
+
+<div class="footer-col">
+<h4>NAVEGAÇÃO</h4>
+
+<a href="#inicio">Início</a>
+<a href="#prefeituraPOA">Prefeitura de Porto Alegre</a>
+<a href="#simulador">Simuladores</a>
+<a href="#quemsomos">Quem Somos</a>
+<a href="#contato">Contato</a>
+
+<div class="footer-policy">
+<a href="#">Política de Privacidade</a>
+<a href="#">Termos de Uso</a>
+<a href="#">LGPD</a>
+</div>
+
+</div>
+
+<div class="footer-col">
+<h4>CENTRO DE ATENDIMENTO</h4>
+
+<p><i class="fa-brands fa-whatsapp"></i> (51) 98918-1267</p>
+<p><i class="fa-solid fa-envelope"></i> atendimento@credcorefinanciamentos.com.br</p>
+<p><i class="fa-brands fa-instagram"></i> @credcorefinanciamentos</p>
+<p><i class="fa-solid fa-clock"></i> Segunda a Sexta • 09h às 18h</p>
+<p><i class="fa-solid fa-location-dot"></i> Porto Alegre • RS</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<strong>CREDCORE FINANCIAMENTOS</strong><br>
+
+CNPJ: 54.989.191/0001-95<br>
+
+Empresa especializada em crédito consignado, refinanciamento, portabilidade e soluções financeiras para servidores públicos, aposentados e pensionistas.
+
+<br><br>
+
+🔒 Ambiente protegido por criptografia SSL<br>
+🛡️ Tratamento de dados em conformidade com a LGPD<br>
+✅ Atendimento humanizado e transparente
+
+<br><br>
+
+© 2026 Credcore Financiamentos. Todos os direitos reservados.
+
+</div>
+
+</footer>
+
+
+
+<script>
+
+/* abrir whatsapp */
+function abrirWhats(){ window.open('https://wa.me/5551995167469?text=Ol%C3%A1!%20Quero%20uma%20simula%C3%A7%C3%A3o','_blank'); }
+
+/* Simulador consignado (PRICE) */
+function simular(){
+  const tipo = document.getElementById('tipoCredito').value;
+  const v = parseFloat(document.getElementById('valor').value);
+  const p = parseInt(document.getElementById('parcelas').value);
+  const out = document.getElementById('resultado');
+  if(isNaN(v) || v <= 0 || isNaN(p) || p < 1){ out.innerText = 'Preencha Valor e Parcelas corretamente.'; return; }
+  let juros, maxParc, nome;
+  if(tipo === 'inss'){ juros = 0.018; maxParc = 96; nome='INSS'; }
+  else if(tipo === 'governo'){ juros = 0.028; maxParc = 96; nome='Governo / Prefeitura'; }
+  else { juros = 0.0355; maxParc = 36; nome='CLT'; }
+  if(p > maxParc){ out.innerHTML = `Número de parcelas excede o limite para <strong>${nome}</strong>. Máximo: ${maxParc}x.`; return; }
+  const parcela = (v * juros) / (1 - Math.pow(1 + juros, -p));
+  const total = parcela * p;
+  out.innerHTML = `Simulação: <strong>${nome}</strong><br>Taxa: <strong>${(juros*100).toFixed(2)}% a.m.</strong><br>Parcela estimada: <strong>R$ ${parcela.toFixed(2)}</strong> • ${p}x<br>Total a pagar: <strong>R$ ${total.toFixed(2)}</strong>`;
+}
+
+function simularPortabilidade(){
+  const saldo = parseFloat(document.getElementById('saldoDevedor').value);
+  const taxaAtual = parseFloat(document.getElementById('taxaAtual').value) / 100;
+  const taxaNova = parseFloat(document.getElementById('taxaNova').value) / 100;
+  const parcelasAtual = parseInt(document.getElementById('parcelasRestantes').value);
+  const parcelasNova = parseInt(document.getElementById('parcelasNovas').value);
+  const tipo = document.getElementById('tipoOperacao').value;
+  const out = document.getElementById('resultadoPortabilidade');
+
+  if(
+    isNaN(saldo) || saldo <= 0 ||
+    isNaN(taxaAtual) || isNaN(taxaNova) ||
+    isNaN(parcelasAtual) || parcelasAtual < 1 ||
+    isNaN(parcelasNova) || parcelasNova < 1
+  ){
+    out.innerText = 'Preencha todos os campos corretamente.';
+    return;
+  }
+
+  // Parcela atual (PRICE)
+  const parcelaAtual = (saldo * taxaAtual) / (1 - Math.pow(1 + taxaAtual, -parcelasAtual));
+  const totalAtual = parcelaAtual * parcelasAtual;
+
+  // Parcela nova (PRICE)
+  const parcelaNova = (saldo * taxaNova) / (1 - Math.pow(1 + taxaNova, -parcelasNova));
+  const totalNovo = parcelaNova * parcelasNova;
+
+  const economiaMensal = parcelaAtual - parcelaNova;
+  const economiaTotal = totalAtual - totalNovo;
+
+  out.innerHTML = `
+    <strong>${tipo === 'portabilidade' ? 'Resultado da Portabilidade' : 'Resultado do Refinanciamento'}</strong><br>
+    Parcela atual: <strong>R$ ${parcelaAtual.toFixed(2)}</strong> (${parcelasAtual}x)<br>
+    Parcela nova: <strong>R$ ${parcelaNova.toFixed(2)}</strong> (${parcelasNova}x)<br>
+    Total atual: R$ ${totalAtual.toFixed(2)}<br>
+    Total novo: R$ ${totalNovo.toFixed(2)}<br>
+    Economia mensal: <strong style="color:${economiaMensal > 0 ? '#25d366' : '#ff4d4d'}">
+      R$ ${economiaMensal.toFixed(2)}
+    </strong><br>
+    Economia total: <strong>R$ ${economiaTotal.toFixed(2)}</strong>
+  `;
+}
+
+/* FAQ toggle (abre só 1) */
+function toggleFAQ(btn){
+  const item = btn.parentElement;
+  document.querySelectorAll('.faq-item').forEach(f => { if(f !== item) f.classList.remove('active'); });
+  item.classList.toggle('active');
+}
+
+/* Pausa parceiros on hover */
+const track = document.getElementById('parceirosTrack');
+if(track){
+  track.addEventListener('mouseenter', ()=> track.style.animationPlayState = 'paused');
+  track.addEventListener('mouseleave', ()=> track.style.animationPlayState = 'running');
+}
+
+/* AJUSTA DOCUMENTOS POR CONVÊNIO */
+ function ajustarConvenio(){
+  const c = document.getElementById('convenio').value;
+  const docs = document.getElementById('docsArea');
+
+  let msg = '';
+
+  if(c === 'inss'){
+    msg = '📄 Documentos necessários: RG/CPF e conta bancária (enviar pelo WhatsApp após a solicitação).';
+  }
+
+  if(c === 'governo'){
+    msg = '📄 Documentos necessários: RG/CPF, comprovante de residência, extrato bancário e senha de averbação (enviar pelo WhatsApp após a solicitação).';
+  }
+
+  if(c === 'clt'){
+    msg = '📄 Documentos necessários: RG/CPF, conta bancária e mínimo de 6 meses de carteira assinada (enviar pelo WhatsApp após a solicitação).';
+  }
+
+  docs.innerHTML = `<div style="color:#ffd700;font-weight:600;margin-top:10px;">${msg}</div>`;
+}
+
+/* CPF + IDADE */
+function validarCPF(cpf){
+  cpf = cpf.replace(/\D/g,'');
+  return cpf.length === 11;
+}
+
+function calcularIdade(data){
+  const hoje = new Date();
+  const nasc = new Date(data);
+  let idade = hoje.getFullYear() - nasc.getFullYear();
+  if(new Date(hoje.getFullYear(),nasc.getMonth(),nasc.getDate()) > hoje) idade--;
+  return idade;
+}
+
+
+/* ENVIO */
+let propostas = JSON.parse(localStorage.getItem('propostas')) || {};
+function enviarFormulario(){
+  const nome = document.getElementById('nome').value;
+  const cpf = document.getElementById('cpf').value;
+  const nasc = document.getElementById('nascimento').value;
+  const conv = document.getElementById('convenio').value;
+  const out = document.getElementById('resultadoAuto');
+
+  if(!validarCPF(cpf)){ out.innerText='CPF inválido'; return; }
+  if(calcularIdade(nasc) < 18){ out.innerText='Idade mínima 18 anos'; return; }
+
+  const protocolo = 'CCR-' + new Date().getFullYear() + '-' + Math.floor(Math.random()*999999);
+
+  propostas[cpf] = {
+    protocolo,
+    status:'Recebida',
+    mensagem:'Recebemos sua solicitação. Aguarde análise.'
+  };
+localStorage.setItem('propostas', JSON.stringify(propostas));
+
+  out.innerHTML = `
+✅ Solicitação enviada com sucesso!<br><br>
+<strong>Protocolo:</strong> ${protocolo}<br><br>
+📲 Nossa equipe da CREDCORE entrará em contato com você pelo WhatsApp para dar andamento à sua proposta.
+`;
+
+}
+const btnMenu = document.querySelector('.menu-toggle');
+const listaMenu = document.querySelector('.menu ul');
+
+btnMenu.addEventListener('click', () => {
+  listaMenu.classList.toggle('show');
+});
+
+function consultarMargemPOA(){
+
+const nome = document.getElementById('nomePOA').value;
+const cpf = document.getElementById('cpfPOA').value;
+const matricula = document.getElementById('matriculaPOA').value;
+
+const out = document.getElementById('resultadoPOA');
+
+if(nome === '' || cpf === '' || matricula === ''){
+
+out.innerHTML =
+'Preencha todos os campos.';
+
+return;
+
+}
+
+const mensagem =
+`Olá! Sou servidor da Prefeitura de Porto Alegre.
+
+Gostaria de consultar minha margem consignável.
+
+Nome: ${nome}
+
+CPF: ${cpf}
+
+Matrícula: ${matricula}`;
+
+window.open(
+'https://wa.me/5551995167469?text=' +
+encodeURIComponent(mensagem),
+'_blank'
+);
+
+}
+
+</script>
+</body>
+</html>
