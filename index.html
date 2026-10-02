@@ -1,0 +1,2460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CREDCORE Financiamentos</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --gold:#c9a227;
+  --bg:#000;
+  --accent:#25d366;
+  --card:#0d0d0d;
+  --muted:#cfcfcf;
+  --maxwidth:1200px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:'Poppins',sans-serif;
+}
+
+html,body{height:100%}
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #050505;
+    color: #fff;
+}
+/* HEADER */
+.header{
+  width:100%;
+  background:linear-gradient(180deg,#000,#080808);
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  box-shadow:0 6px 30px rgba(0,0,0,0.6);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:70px;height:70px;border-radius:12px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,215,0,0.06)}
+.logo img{width:100%;height:100%;object-fit:cover}
+.header h1{color:#fff;font-size:1.4rem;margin:0}
+.header .tag{color:var(--muted);font-size:0.85rem}
+
+/* MENU HORIZONTAL AO LADO DO LOGO */
+.header .brand{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--maxwidth);
+}
+
+.menu ul{
+  display: flex;
+  list-style: none;
+  gap: 28px;
+}
+
+.menu ul li a{
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.menu ul li a:hover{
+  color: var(--gold);
+}
+
+/* RESPONSIVO */
+@media(max-width:900px){
+  .menu ul{
+    flex-direction: column;
+    gap: 16px;
+    background: #0b0b0b;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    padding: 16px;
+    display: none;
+    border-radius: 8px;
+  }
+  .menu ul.show{
+    display: flex;
+  }
+  .header .brand{
+    justify-content: space-between;
+  }
+}
+
+@keyframes floaty{0%{transform:translateY(0) scaleX(-1);}100%{transform:translateY(-8px) scaleX(-1);}}
+.banner-text{
+  position:relative;
+  z-index:2;
+  margin-left:48%;
+  max-width:480px;
+  text-align:left;
+}
+.banner-text h2{
+  background:linear-gradient(90deg,var(--gold),#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-size:2.2rem;
+  margin-bottom:10px;
+  font-weight:700;
+}
+.banner-text p{color:#eaeaea;font-size:1rem;margin-bottom:16px;line-height:1.5}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{
+    width:100%;
+    height:68px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        90deg,
+        #c9a227,
+        #ffea70
+    );
+
+    color:#000;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 12px 30px rgba(255,215,0,.35);
+
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.05);
+}
+
+/* SIMULADOR (aligned under banner, border touches banner) */
+.simulador{
+max-width:1180px;
+width:80%;
+margin:20px auto;
+padding:45px;
+background:#0d0d0d;
+border-radius:28px;
+border:1px solid rgba(255,215,0,.15);
+position:relative;
+overflow:hidden;
+transition:.3s;
+}
+
+.simulador h2{
+
+font-size:34px;
+
+font-weight:800;
+
+margin-bottom:12px;
+
+background:linear-gradient(
+90deg,
+#c9a227,
+#FFF);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+.simulador p{color:#eaeaea;margin-bottom:12px}
+
+.fields{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:18px;
+
+margin-top:25px;
+
+margin-bottom:25px;
+
+}
+.fields input,
+.fields select{
+
+width:100%;
+
+height:58px;
+
+background:#0d0d0d;
+
+border:1px solid rgba(255,215,0,.18);
+
+border-radius:16px;
+
+padding:0 18px;
+
+color:#ffffff;
+
+font-size:16px;
+
+transition:.30s;
+
+}
+
+.fields input:focus,
+.fields select:focus{
+
+outline:none;
+
+border-color:#c9a227;
+
+box-shadow:0 0 18px rgba(255,215,0,.18);
+
+}
+
+.btn-calc{
+
+width:260px;
+
+height:58px;
+
+border:none;
+
+border-radius:18px;
+
+background:linear-gradient(
+135deg,
+#c9a227,
+#F6C000);
+
+color:#000;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.30s;
+
+}
+
+.btn-calc:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+
+0 15px 35px rgba(255,215,0,.35);
+
+}
+.resultado{margin-top:12px;text-align:center;font-weight:700;color:#fff;font-size:1.05rem}
+
+
+/* QUEM SOMOS */
+.quemsomos{max-width:var(--maxwidth);margin:30px auto;padding:26px;background:#111;border-radius:14px;border:1px solid rgba(255,255,255,0.03);text-align:center}
+.quemsomos h2{color:var(--gold);margin-bottom:8px}
+.quemsomos p{color:#ddd;line-height:1.6;max-width:980px;margin:0 auto}
+
+/* SERVIÇOS */
+.container{max-width:1120px;margin:36px auto;padding:0 18px}
+.section{background:#111;border-radius:14px;padding:28px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 8px 30px rgba(0,0,0,0.6);margin-bottom:22px}
+.section h2{color:var(--gold);text-align:center;margin-bottom:10px}
+.servicos-grid{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:10px}
+.service-card {
+    background: #111;
+    border: 1px solid rgba(255,255,255,.05);
+    padding: 30px;
+}
+.service-card:hover{transform:translateY(-6px)}
+.service-card h3{color:var(--gold);margin-bottom:8px}
+.subitems{color:#ddd;margin-left:8px}
+
+/* PARCEIROS (12 logos + duplicates for loop) */
+.parceiros-wrapper{
+    width:100%;
+    max-width:100%;
+    margin:36px 0;
+    overflow:hidden;
+    padding:6px 0;
+    position:relative;
+}
+.parceiros-track{
+    display:flex;
+    width:max-content;
+    gap:36px;
+    align-items:center;
+    animation:scroll 30s linear infinite;
+}
+.parceiros-track img{width:120px;height:auto;border-radius:8px;background:#fff;padding:8px;transition:transform .25s}
+.parceiros-track img:hover{transform:scale(1.05)}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* FAQ */
+.faq-grid{max-width:920px;margin:18px auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;background:#0f0f0f}
+.faq-item button{
+  width:100%;
+  background:#0f0f0f;
+  color:#fff;
+  padding:16px;
+  border:none;
+  text-align:left;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.faq-resposta{
+  max-height:0;
+  overflow:hidden;
+  background:#0d0d0d;
+  padding:0 16px;
+  color:#fff;
+  margin:0;
+  transition:max-height .35s ease;
+}
+
+.faq-item.active .faq-resposta{max-height:320px;padding:12px 16px}
+
+/* CONTATO */
+.contato{max-width:var(--maxwidth);margin:30px auto;text-align:center}
+.contact-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.info{background:#0d0d0d;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,215,0,0.06);display:flex;align-items:center;gap:12px;min-width:260px;justify-content:center}
+.info i{color:var(--gold);font-size:20px}
+.info a, .info span{color:var(--gold);font-weight:700;text-decoration:none}
+.socials{margin-top:12px;display:flex;gap:12px;justify-content:center}
+.socials a{color:var(--gold);font-size:20px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px}
+.socials a:hover{transform:scale(1.1)}
+
+/* WHATSAPP FIXO */
+#whats-fixo{position:fixed;bottom:22px;right:22px;background:linear-gradient(90deg,var(--accent),#0fbf5b);color:#fff;border-radius:50%;width:58px;height:58px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 30px rgba(0,0,0,0.4);z-index:9999}
+
+/* FOOTER */
+footer{margin-top:36px;padding:20px;text-align:center;color:#bbb;border-top:1px solid rgba(255,215,0,0.06)
+}
+
+/* RESPONSIVO */
+@media (max-width:900px){
+  .banner-text{margin-left:0;max-width:78%}
+  .simulador,.calculadora-fgts{padding:20px}
+}
+
+@media (max-width:768px){
+  .banner-area img.mulher{display:none} /* image hidden on mobile (option A) */
+  .banner-text{margin-left:0;text-align:center;padding:12px}
+  .contact-grid .info{width:100%}
+  .fields select,.fields input{width:100%}
+  .parceiros-track{gap:18px}
+}
+
+/* Linha decorativa no topo */
+.simulador::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:5px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+
+/* ÍCONE DO SIMULADOR */
+.sim-sub{
+
+font-size:17px;
+
+color:#bdbdbd;
+
+margin-bottom:30px;
+
+}
+
+/* SUBTÍTULO */
+.sim-sub{
+  font-size:0.9rem;
+  color:#cfcfcf;
+  margin-bottom:14px;
+}
+
+/* EFEITO HOVER */
+.simulador:hover{
+  transform:translateY(-4px);
+  transition:0.3s;
+  box-shadow:0 25px 60px rgba(0,0,0,0.7);
+}
+.menu-toggle{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
+  color:#fff;
+}
+
+@media(max-width:900px){
+  .menu-toggle{
+    display:block;
+  }
+}
+
+/* ===== CONTATO CREDCORE (FORÇADO) ===== */
+
+#contato{
+  max-width:1100px !important;
+  margin:70px auto !important;
+  padding:40px 20px !important;
+  text-align:center !important;
+}
+
+#contato h2{
+  color:#c9a227 !important;
+  font-size:2.1rem !important;
+  margin-bottom:10px !important;
+}
+
+#contato p{
+  color:#cfcfcf !important;
+  font-size:1rem !important;
+}
+
+#contato .contato-grid{
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr)) !important;
+  gap:26px !important;
+  margin-top:35px !important;
+}
+
+#contato .contato-card{
+  background:linear-gradient(180deg,#0b0b0b,#020202) !important;
+  border:1px solid rgba(255,215,0,0.25) !important;
+  border-radius:20px !important;
+  padding:30px 22px !important;
+  box-shadow:0 15px 45px rgba(0,0,0,0.8) !important;
+  transition:all .3s ease !important;
+}
+
+#contato .contato-card:hover{
+  transform:translateY(-8px) !important;
+  box-shadow:0 22px 60px rgba(255,215,0,0.35) !important;
+}
+
+#contato .contato-card i{
+  font-size:44px !important;
+  color:#c9a227 !important;
+  margin-bottom:14px !important;
+}
+
+#contato .contato-card h3{
+  color:#ffffff !important;
+  font-size:1.15rem !important;
+  margin-bottom:14px !important;
+}
+
+#contato .contato-btn{
+  display:block !important;
+  margin:10px auto !important;
+  padding:14px 18px !important;
+  border-radius:999px !important;
+  background:linear-gradient(90deg,#c9a227,#ffea70) !important;
+  color:#000 !important;
+  font-weight:700 !important;
+  text-decoration:none !important;
+  box-shadow:0 8px 25px rgba(255,215,0,0.45) !important;
+  transition:all .25s ease !important;
+}
+
+#contato .contato-btn:hover{
+  transform:scale(1.06) !important;
+  filter:brightness(1.12) !important;
+}
+
+/* ===== FORÇA COR AMARELA NO CONTATO (ANTI-AZUL) ===== */
+/* Título principal continua amarelo */
+#contato h2{
+  color:#c9a227 !important;
+}
+
+/* Texto e nomes dos canais ficam brancos */
+#contato p,
+#contato h3{
+  color:#ffffff !important;
+}
+
+/* Ícones ficam brancos */
+#contato .contato-card i{
+  color:#ffffff !important;
+}
+
+/* Links normais ficam brancos */
+#contato a{
+  color:#ffffff !important;
+  text-decoration:none !important;
+}
+
+.banner-area::before{
+content:'';
+position:absolute;inset:0;
+background:radial-gradient(circle at 28% 50%,rgba(255,215,0,.18),transparent 35%);
+z-index:0;
+}
+.banner-area img.mulher{z-index:2;height:96%;}
+.banner-text{background:rgba(0,0,0,.28);backdrop-filter:blur(4px);padding:24px;border-radius:18px;}
+
+.footer{
+    background:#050505;
+    border-top:1px solid rgba(255,215,0,.15);
+    margin-top:60px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+    display:grid;
+    grid-template-columns: 1.2fr .8fr 1.2fr;
+    gap:40px;
+    align-items:start;
+
+}
+
+.footer-col:nth-child(2){
+    text-align:left;
+}
+
+.footer-col{
+    flex:1;
+    min-width:250px;
+    text-align:left;
+}
+
+.footer-col h4{
+    color:#ffffff;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.footer-col p{
+    color:#bdbdbd;
+    font-size:13px;
+    line-height:2.2;
+    margin-bottom:12px;
+}
+
+.footer-col a{
+    display:block;
+    color:#bdbdbd;
+    text-decoration:none;
+    margin-bottom:8px;
+    font-size:13px;
+}
+
+.footer-col a:hover{
+    color:#c9a227;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.08);
+    text-align:center;
+    padding:15px;
+    font-size:11px;
+    color:#9e9e9e;
+}
+
+.banner-area{
+    margin-bottom:-20px;
+
+    position:relative;
+
+    height:570px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding-right:8%;
+
+    overflow:visible;
+
+    background:url("banner-principal.png") center center;
+
+    background-size:cover;
+
+    background-repeat:no-repeat;
+
+}
+
+.banner-area:before{
+    content:'';
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 25% 50%,rgba(255,215,0,.18),transparent 45%);
+
+    z-index:0;
+}
+
+.hero-card{
+    position:relative;
+    z-index:3;
+
+    width:520px;
+    max-width:100%;
+
+    margin-right:6%;
+
+    background:transparent;
+
+    border:none;
+
+    box-shadow:none;
+
+    backdrop-filter:none;
+
+    padding:0;
+}
+
+.hero-top{
+    color:#c9a227;
+    font-size:.82rem;
+}
+
+.hero-card h1{
+    font-size:54px;
+    line-height:58px;
+    font-weight:800;
+    margin:15px 0;
+}
+
+.hero-card h1 span{
+
+background:none;
+
+color:#ffffff;
+
+-webkit-text-fill-color:#ffffff;
+
+text-shadow:none;
+
+}
+
+.hero-card h3{
+    font-size:20px;
+    color:#c9a227;
+    font-weight:600;
+    margin:18px 0 20px;
+}
+
+.hero-list{
+    margin:15px 0;
+}
+
+.hero-list li{
+    margin:10px 0;
+    font-size:17px;
+    color:#f2f2f2;
+    list-style:none;
+}
+
+
+.hero-premium{
+height:760px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+max-width:1200px;
+margin:0 auto;
+padding:40px 20px;
+position:relative;
+z-index:2;
+
+}
+.hero-card-premium{
+width:520px;
+background:rgba(0,0,0,.82);
+border:2px solid rgba(255,215,0,.55);
+border-radius:28px;
+padding:45px;
+box-shadow:0 0 40px rgba(255,215,0,.15);
+}
+.hero-card-premium h1{font-size:64px;line-height:1}
+.hero-card-premium h1 span{
+background:linear-gradient(180deg,#fff7b3,#c9a227,#ffb700,#fff1a0);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* BOTÃO NOVO DO BANNER */
+
+.btn-banner{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:300px;
+
+    height:58px;
+
+    border-radius:18px;
+
+    text-decoration:none;
+
+    background:linear-gradient(135deg,#c9a227,#F5C400);
+
+    color:#ffffff;
+
+    font-size:19px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    border:2px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 15px 35px rgba(255,215,0,.35);
+
+    transition:.35s ease;
+}
+
+.btn-banner:hover{
+
+    transform:translateY(-4px) scale(1.03);
+
+    box-shadow:
+        0 22px 45px rgba(255,215,0,.50);
+
+    filter:brightness(1.08);
+
+}
+
+
+/* MELHORIAS RESPONSIVAS AUTOMÁTICAS */
+.menu{position:relative;}
+
+@media(max-width:900px){
+  .fields{
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media(max-width:768px){
+  .footer-container{
+    grid-template-columns:1fr !important;
+    text-align:left !important;
+  }
+
+  .footer-col,
+  .footer-col:nth-child(2){
+    text-align:center !important;
+  }
+
+  .banner-area{
+    height:auto !important;
+    min-height:500px !important;
+    padding:40px 20px !important;
+  }
+
+  .hero-card{
+    width:100% !important;
+    margin-right:0 !important;
+  }
+
+  .logo{
+    width:55px !important;
+    height:55px !important;
+  }
+
+  .header h1{
+    font-size:1.1rem !important;
+  }
+
+  .simulador{
+    width:95% !important;
+    padding:20px !important;
+  }
+}
+
+@media(max-width:1200px){
+  .hero-card{
+    width:450px;
+    margin-right:0;
+  }
+}
+
+
+.footer-whats{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(90deg,#25d366,#1db954);
+    color:#fff !important;
+    padding:12px 20px;
+    border-radius:999px;
+    font-weight:700;
+    margin-top:15px;
+    transition:.3s;
+}
+.footer-whats:hover{transform:translateY(-3px);}
+
+
+.fintech-seals{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:20px;
+}
+
+.fintech-seal{
+padding:10px 14px;
+border:1px solid rgba(255,215,0,.25);
+border-radius:12px;
+background:#0a0a0a;
+font-size:12px;
+color:#eaeaea;
+}
+
+.footer-policy{
+margin-top:18px;
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.footer-policy a{
+font-size:12px;
+color:#cfcfcf !important;
+}
+
+.footer-bottom{
+line-height:1.8;
+}
+
+.servicos-premium{
+background:
+linear-gradient(
+180deg,
+#0d0d0d,
+#050505
+);
+border:1px solid rgba(255,215,0,.15);
+}
+
+.titulo-servicos{
+text-align:center;
+margin-bottom:40px;
+}
+
+.titulo-servicos span{
+color:#c9a227;
+font-size:12px;
+letter-spacing:3px;
+font-weight:700;
+}
+
+.titulo-servicos h2{
+font-size:42px;
+margin-top:10px;
+margin-bottom:12px;
+font-weight:800;
+}
+
+.titulo-servicos p{
+max-width:700px;
+margin:auto;
+color:#cfcfcf;
+}
+
+.servicos-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+margin-top:40px;
+}
+
+.service-card{
+background:linear-gradient(
+180deg,
+#121212,
+#060606
+);
+border:1px solid rgba(255,215,0,.15);
+border-radius:22px;
+padding:30px;
+text-align:left;
+transition:.35s;
+}
+
+.service-card:hover{
+transform:translateY(-8px);
+box-shadow:
+0 20px 40px rgba(255,215,0,.18);
+border-color:#c9a227;
+}
+
+.service-card i{
+font-size:42px;
+color:#c9a227;
+margin-bottom:20px;
+}
+
+.service-card h3{
+font-size:19px;
+margin-bottom:12px;
+color:#fff;
+}
+
+.service-card p{
+color:#cfcfcf;
+line-height:1.6;
+}
+
+/* BOTÃO PRINCIPAL SOBRE O BANNER */
+
+.btn-banner-novo{
+    position:absolute;
+
+    right:16%;
+    bottom:55px;
+
+    z-index:10;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+
+    width:320px;
+    height:64px;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e6bd57,
+            #c99a30
+        );
+
+    color:#080808;
+
+    text-decoration:none;
+
+    font-size:18px;
+    font-weight:800;
+    letter-spacing:.6px;
+
+    border:1px solid rgba(255,255,255,.30);
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.45),
+        0 5px 25px rgba(201,162,39,.28);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        filter .25s ease;
+}
+
+
+.btn-banner-novo i{
+    font-size:18px;
+}
+
+
+.btn-banner-novo:hover{
+
+    transform:translateY(-3px);
+
+    filter:brightness(1.08);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.50),
+        0 7px 30px rgba(201,162,39,.38);
+}
+
+/* ==================================================
+   PADRÃO FINTECH CREDCORE
+   ================================================== */
+
+.fintech-card{
+    width:calc(100% - 40px);
+    max-width:1180px;
+    margin:24px auto;
+    padding:34px;
+
+    position:relative;
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(18,18,18,.98),
+            rgba(7,7,7,.98)
+        );
+
+    border:1px solid rgba(201,162,39,.18);
+    border-radius:24px;
+
+    box-shadow:
+        0 18px 50px rgba(0,0,0,.38);
+
+    transition:
+        transform .28s ease,
+        border-color .28s ease,
+        box-shadow .28s ease;
+}
+
+.fintech-card::before{
+    content:'';
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c9a227,
+            rgba(201,162,39,.25),
+            transparent 75%
+        );
+}
+
+.fintech-card:hover{
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(201,162,39,.35);
+
+    box-shadow:
+        0 22px 60px rgba(0,0,0,.52),
+        0 0 30px rgba(201,162,39,.05);
+}
+
+
+/* CABEÇALHO DE TODAS AS CAIXAS */
+
+.fintech-head{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+
+    margin-bottom:26px;
+}
+
+.fintech-icon{
+    width:54px;
+    height:54px;
+
+    flex:0 0 54px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(201,162,39,.16),
+            rgba(201,162,39,.04)
+        );
+
+    border:
+        1px solid rgba(201,162,39,.28);
+
+    color:#d8b557;
+
+    font-size:23px;
+}
+
+.fintech-kicker{
+    color:#d8b557;
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:2.2px;
+    text-transform:uppercase;
+
+    margin-bottom:6px;
+}
+
+.fintech-card .fintech-title{
+    color:#ffffff !important;
+
+    background:none !important;
+
+    -webkit-background-clip:initial !important;
+    -webkit-text-fill-color:#ffffff !important;
+
+    font-size:28px;
+    line-height:1.2;
+
+    font-weight:700;
+
+    text-align:left;
+
+    margin:0 0 7px 0;
+}
+
+.fintech-desc{
+    color:#bdbdbd;
+
+    font-size:15px;
+    line-height:1.65;
+
+    max-width:850px;
+
+    margin:0;
+}
+
+
+/* CAMPOS */
+
+.fintech-card .fields{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+
+    margin:
+        24px 0 22px;
+}
+
+.fintech-card input,
+.fintech-card select{
+
+    width:100%;
+    height:54px;
+
+    padding:0 16px;
+
+    background:#0a0a0a;
+
+    color:#ffffff;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius:14px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.25s ease;
+}
+
+.fintech-card input:focus,
+.fintech-card select:focus{
+
+    border-color:
+        rgba(201,162,39,.60);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(201,162,39,.07);
+}
+
+
+/* BOTÕES */
+
+.fintech-card .btn-calc{
+
+    width:auto;
+    min-width:220px;
+
+    height:52px;
+
+    padding:0 25px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d8b557,
+            #b98f27
+        );
+
+    color:#080808;
+
+    font-size:15px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 12px 30px
+        rgba(201,162,39,.16);
+
+    transition:.25s ease;
+}
+
+.fintech-card .btn-calc:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 16px 34px
+        rgba(201,162,39,.26);
+}
+
+
+/* QUEM SOMOS */
+
+.quemsomos.fintech-card{
+    text-align:left;
+}
+
+.quemsomos.fintech-card p{
+    max-width:none;
+    text-align:left;
+    margin:0;
+}
+
+
+/* SERVIÇOS */
+
+.container{
+    max-width:1180px;
+}
+
+.container .fintech-card{
+
+    width:100%;
+
+    margin:
+        24px auto;
+}
+
+.fintech-card .servicos-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+
+    margin-top:26px;
+}
+
+.fintech-card .service-card{
+
+    padding:22px;
+
+    background:#0a0a0a;
+
+    border:
+        1px solid rgba(255,255,255,.06);
+
+    border-radius:16px;
+
+    box-shadow:none;
+}
+
+.fintech-card .service-card:hover{
+
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(201,162,39,.25);
+
+    box-shadow:
+        0 12px 25px
+        rgba(0,0,0,.25);
+}
+
+.fintech-card .service-card i{
+
+    font-size:26px;
+
+    color:#c9a227;
+
+    margin-bottom:14px;
+}
+
+.fintech-card .service-card h3{
+
+    color:#ffffff;
+
+    font-size:16px;
+
+    margin-bottom:7px;
+}
+
+.fintech-card .service-card p{
+
+    color:#bdbdbd;
+
+    font-size:14px;
+
+    line-height:1.55;
+}
+
+
+/* FAQ */
+
+.fintech-card .faq-grid{
+
+    max-width:none;
+
+    margin:8px 0 0;
+
+    gap:8px;
+}
+
+.fintech-card .faq-item{
+
+    background:#0a0a0a;
+
+    border:
+        1px solid rgba(255,255,255,.06);
+
+    border-radius:14px;
+}
+
+.fintech-card .faq-item button{
+
+    background:transparent;
+
+    color:#ffffff;
+
+    padding:18px 20px;
+
+    font-size:15px;
+}
+
+.fintech-card .faq-resposta{
+
+    background:transparent;
+
+    color:#bdbdbd;
+}
+
+
+/* TEXTOS PEQUENOS */
+
+.fintech-card small{
+
+    color:#8f8f8f !important;
+
+    font-size:12px !important;
+
+    line-height:1.5;
+}
+
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .fintech-card{
+
+        width:calc(100% - 24px);
+
+        padding:24px;
+
+        border-radius:20px;
+    }
+
+    .fintech-card .fields{
+
+        grid-template-columns:1fr;
+    }
+
+    .fintech-card .servicos-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .fintech-head{
+
+        gap:12px;
+    }
+
+    .fintech-icon{
+
+        width:46px;
+        height:46px;
+
+        flex-basis:46px;
+
+        font-size:19px;
+    }
+
+    .fintech-card .fintech-title{
+
+        font-size:22px;
+    }
+
+    .fintech-card .btn-calc{
+
+        width:100%;
+    }
+}
+
+
+/* ==================================================
+   HEADER / MENU FINTECH CREDCORE — VERSÃO FINAL
+   ================================================== */
+.header{width:100%!important;position:sticky!important;top:0!important;z-index:1000!important;padding:0 22px!important;background:rgba(4,4,4,.96)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,162,39,.14)!important;box-shadow:0 8px 30px rgba(0,0,0,.34)!important;}
+.header-inner{width:100%;max-width:1240px;height:86px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:26px;}
+.header-brand{display:flex;align-items:center;flex-shrink:0;text-decoration:none;}
+.header-logo{display:block;width:250px;height:auto;max-height:62px;object-fit:contain;object-position:left center;filter:drop-shadow(0 4px 12px rgba(0,0,0,.28));}
+.header .menu{margin-left:auto;position:relative;}
+.header .menu ul{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0;}
+.header .menu ul li{margin:0;}
+.header .menu ul li a{position:relative;display:flex;align-items:center;justify-content:center;height:42px;padding:0 10px;color:#d8d8d8;text-decoration:none;font-size:12.5px;font-weight:500;white-space:nowrap;border-radius:9px;transition:color .25s ease,background .25s ease,transform .25s ease;}
+.header .menu ul li:not(.menu-cta) a::after{content:'';position:absolute;left:50%;bottom:4px;width:0;height:2px;transform:translateX(-50%);border-radius:3px;background:#c9a227;transition:width .25s ease;}
+.header .menu ul li:not(.menu-cta) a:hover{color:#fff;background:rgba(255,255,255,.025);}
+.header .menu ul li:not(.menu-cta) a:hover::after{width:26px;}
+.header .menu .menu-cta{margin-left:10px;}
+.header .menu .menu-cta a{min-width:144px;height:44px;padding:0 17px;gap:9px;border-radius:11px;background:linear-gradient(135deg,#ddb95c,#b98f2c);color:#080808!important;font-size:12.5px;font-weight:800;box-shadow:0 8px 24px rgba(201,162,39,.16);border:1px solid rgba(255,255,255,.14);}
+.header .menu .menu-cta a:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 12px 28px rgba(201,162,39,.26);}
+.header .menu .menu-cta a::after{display:none!important;}
+.header .menu-toggle{display:none;width:42px;height:42px;align-items:center;justify-content:center;border-radius:10px;background:#0c0c0c;border:1px solid rgba(201,162,39,.16);color:#fff;font-size:18px;cursor:pointer;}
+@media(max-width:1120px){.header-logo{width:205px;max-height:56px}.header .menu ul li a{padding:0 7px;font-size:11.5px}.header .menu .menu-cta a{min-width:132px;padding:0 14px}}
+@media(max-width:900px){.header{padding:0 14px!important}.header-inner{height:72px}.header-logo{width:190px;max-height:54px}.header .menu-toggle{display:flex;margin-left:auto}.header .menu{position:absolute;top:72px;left:0;width:100%;margin:0}.header .menu ul{display:none;width:calc(100% - 24px);margin:0 auto;padding:14px;flex-direction:column;align-items:stretch;gap:4px;background:rgba(8,8,8,.99);border:1px solid rgba(201,162,39,.14);border-radius:0 0 18px 18px;box-shadow:0 18px 40px rgba(0,0,0,.55)}.header .menu ul.show{display:flex}.header .menu ul li a{width:100%;height:44px;justify-content:flex-start;padding:0 14px;font-size:14px}.header .menu .menu-cta{margin:8px 0 0}.header .menu .menu-cta a{justify-content:center;width:100%;height:48px}}
+@media(max-width:520px){.header-logo{width:155px;max-height:48px}}
+
+
+/* ==================================================
+   CONTATO FINTECH CREDCORE — PADRÃO FINAL
+   ================================================== */
+
+#contato.contato-fintech{
+    max-width:1180px !important;
+    width:calc(100% - 40px) !important;
+    margin:24px auto !important;
+    padding:34px !important;
+    text-align:left !important;
+}
+
+#contato.contato-fintech .fintech-head{
+    margin-bottom:28px;
+}
+
+#contato.contato-fintech .fintech-title{
+    color:#fff !important;
+    text-align:left !important;
+    margin:0 0 7px 0 !important;
+}
+
+#contato.contato-fintech .fintech-desc{
+    color:#bdbdbd !important;
+    margin:0 !important;
+}
+
+.contato-grid-fintech{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    margin-top:8px;
+}
+
+.contato-card-fintech{
+    position:relative;
+    display:grid !important;
+    grid-template-columns:56px 1fr auto;
+    align-items:center;
+    gap:16px;
+    min-height:118px;
+    padding:20px;
+    border-radius:18px;
+    background:linear-gradient(180deg,#0d0d0d,#080808);
+    border:1px solid rgba(255,255,255,.065);
+    text-decoration:none !important;
+    overflow:hidden;
+    transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease,background .28s ease;
+}
+
+.contato-card-fintech::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:2px;
+    background:linear-gradient(90deg,rgba(201,162,39,.8),rgba(201,162,39,.16),transparent 78%);
+    opacity:.55;
+}
+
+.contato-card-fintech:hover{
+    transform:translateY(-4px);
+    border-color:rgba(201,162,39,.28);
+    background:linear-gradient(180deg,#111,#090909);
+    box-shadow:0 16px 34px rgba(0,0,0,.32),0 0 24px rgba(201,162,39,.05);
+}
+
+.contato-card-icon{
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#d8b557;
+    font-size:24px;
+    background:linear-gradient(145deg,rgba(201,162,39,.15),rgba(201,162,39,.035));
+    border:1px solid rgba(201,162,39,.25);
+}
+
+.contato-card-texto{
+    min-width:0;
+}
+
+.contato-card-label{
+    display:block;
+    margin-bottom:4px;
+    color:#b99743;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:1.5px;
+}
+
+#contato .contato-card-fintech h3{
+    margin:0 0 4px 0 !important;
+    color:#fff !important;
+    font-size:17px !important;
+    font-weight:700 !important;
+}
+
+#contato .contato-card-fintech p{
+    margin:0 !important;
+    color:#999 !important;
+    font-size:13px !important;
+    line-height:1.45 !important;
+}
+
+.contato-card-arrow{
+    color:#6f6f6f;
+    font-size:14px;
+    transition:color .25s ease,transform .25s ease;
+}
+
+.contato-card-fintech:hover .contato-card-arrow{
+    color:#d8b557;
+    transform:translate(2px,-2px);
+}
+
+#contato a.contato-card-fintech{
+    color:inherit !important;
+}
+
+@media(max-width:800px){
+    #contato.contato-fintech{
+        width:calc(100% - 24px) !important;
+        padding:24px !important;
+    }
+
+    .contato-grid-fintech{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:480px){
+    .contato-card-fintech{
+        grid-template-columns:48px 1fr auto;
+        gap:13px;
+        min-height:104px;
+        padding:16px;
+    }
+
+    .contato-card-icon{
+        width:48px;
+        height:48px;
+        font-size:21px;
+        border-radius:14px;
+    }
+}
+
+
+/* ==================================================
+   BANNER MOBILE — MULHER VISÍVEL NA CAPA
+   ================================================== */
+
+@media(max-width:768px){
+
+    .banner-area{
+        height:560px !important;
+        min-height:560px !important;
+
+        /* Mantém a capa preenchendo toda a tela e desloca o foco
+           para a direita, onde está a mulher no banner */
+        background-size:cover !important;
+        background-position:72% center !important;
+        background-repeat:no-repeat !important;
+
+        padding:0 !important;
+        margin-bottom:12px !important;
+        overflow:hidden !important;
+
+        display:flex !important;
+        align-items:flex-end !important;
+        justify-content:center !important;
+    }
+
+    /* O banner atual já contém a mulher na própria imagem.
+       Garante que nenhuma regra antiga esconda elementos de imagem,
+       caso uma versão futura use <img class="mulher">. */
+    .banner-area img.mulher{
+        display:block !important;
+        position:absolute !important;
+        right:-8% !important;
+        bottom:0 !important;
+        height:88% !important;
+        width:auto !important;
+        object-fit:contain !important;
+        z-index:2 !important;
+    }
+
+    /* Suaviza o lado esquerdo para o texto da arte continuar legível
+       sem apagar a mulher no lado direito */
+    .banner-area::before{
+        background:
+            linear-gradient(
+                90deg,
+                rgba(0,0,0,.42) 0%,
+                rgba(0,0,0,.18) 42%,
+                rgba(0,0,0,.02) 72%,
+                rgba(0,0,0,0) 100%
+            ) !important;
+    }
+
+    /* Botão real do site fica na parte inferior da capa */
+    .btn-banner-novo{
+        position:absolute !important;
+        left:50% !important;
+        right:auto !important;
+        bottom:24px !important;
+        transform:translateX(-50%) !important;
+
+        width:calc(100% - 48px) !important;
+        max-width:330px !important;
+        height:56px !important;
+
+        font-size:15px !important;
+        border-radius:12px !important;
+        z-index:10 !important;
+    }
+
+    .btn-banner-novo:hover{
+        transform:translateX(-50%) translateY(-2px) !important;
+    }
+}
+
+@media(max-width:480px){
+    .banner-area{
+        height:520px !important;
+        min-height:520px !important;
+
+        /* Um pouco mais para a direita em telas bem estreitas */
+        background-position:74% center !important;
+    }
+
+    .btn-banner-novo{
+        width:calc(100% - 36px) !important;
+        bottom:20px !important;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- PAINEL INTERNO CREDCORE -->
+<section class="simulador" id="painelAdmin" style="display:none">
+  <h2>Painel Interno — CREDCORE</h2>
+
+  <div class="fields">
+    <input type="text" id="adminCpf" placeholder="CPF do cliente">
+    <input type="text" id="adminProtocolo" placeholder="Protocolo">
+  </div>
+
+  <div class="fields">
+    <select id="adminStatus">
+      <option>Recebida</option>
+      <option>Em análise</option>
+      <option>Pendente documentação</option>
+      <option>Aprovada</option>
+      <option>Contrato assinado</option>
+      <option>Pago</option>
+      <option>Recusada</option>
+    </select>
+  </div>
+
+  <textarea id="adminMensagem" placeholder="Mensagem para o cliente"
+    style="width:100%;padding:12px;border-radius:10px;background:#060606;color:#c9a227;border:1px solid rgba(255,215,0,0.1);min-height:90px"></textarea>
+
+  <br><br>
+ 
+
+  <div class="resultado" id="resultadoAdmin"></div>
+</section>
+
+<!-- HEADER FINTECH CREDCORE -->
+<header class="header" role="banner">
+  <div class="header-inner">
+    <a href="#inicio" class="header-brand" aria-label="CREDCORE - Início">
+      <img src="logo_credcore_com_monograma_dourado.png" alt="CREDCORE Consultoria e Financiamentos" class="header-logo">
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <nav class="menu" aria-label="Navegação principal">
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#prefeituraPOA">Prefeitura POA</a></li>
+        <li><a href="#simulador">Simuladores</a></li>
+        <li><a href="#quemsomos">Quem Somos</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li class="menu-cta"><a href="#simulador">Simule agora <i class="fa-solid fa-arrow-right"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- BANNER -->
+<section class="banner-area" id="inicio">
+
+    <a href="#simulador" class="btn-banner-novo">
+        SIMULE AGORA
+        <i class="fa-solid fa-arrow-right"></i>
+    </a>
+
+</section>
+
+<section class="simulador fintech-card" id="prefeituraPOA">
+<div class="fintech-head">
+
+    <div class="fintech-icon">
+        <i class="fa-solid fa-building-columns"></i>
+    </div>
+
+    <div>
+
+        <div class="fintech-kicker">
+            ATENDIMENTO ESPECIALIZADO
+        </div>
+
+        <h2 class="fintech-title">
+            Servidores da Prefeitura de Porto Alegre
+        </h2>
+
+        <p class="fintech-desc">
+            Consulte sua margem consignável com atendimento
+            especializado e análise personalizada.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="fields">
+
+<input
+type="text"
+id="nomePOA"
+placeholder="Nome completo">
+
+<input
+type="text"
+id="cpfPOA"
+placeholder="CPF">
+
+<input
+type="text"
+id="matriculaPOA"
+placeholder="Matrícula funcional">
+
+</div>
+
+<div style="text-align:center;">
+
+<button
+class="btn-calc"
+onclick="consultarMargemPOA()">
+
+Consultar minha margem
+
+</button>
+
+</div>
+
+<div
+class="resultado"
+id="resultadoPOA">
+</div>
+
+<small style="display:block;margin-top:8px;color:#bbb;font-size:0.75rem">
+
+Consulta realizada pela equipe CREDCORE.
+Sujeita à validação das informações fornecidas.
+
+</small>
+
+</section>
+
+<!-- SIMULADOR -->
+<section class="simulador fintech-card" id="simulador" aria-label="Simulador consignado">
+<div class="fintech-head">
+
+    <div class="fintech-icon">
+        <i class="fa-solid fa-calculator"></i>
+    </div>
+
+    <div>
+
+        <div class="fintech-kicker">
+            SIMULAÇÃO RÁPIDA
+        </div>
+
+        <h2 class="fintech-title">
+            Simulador de Empréstimo
+        </h2>
+
+        <p class="fintech-desc">
+            Escolha o tipo de crédito, informe o valor desejado
+            e veja uma estimativa da parcela.
+        </p>
+
+    </div>
+
+</div>
+
+  <div class="fields" role="form" aria-label="Campos de simulação">
+    <select id="tipoCredito" aria-label="Tipo de crédito">
+      <option value="inss">INSS — 1,80% a.m. (até 96x)</option>
+      <option value="governo">Governo / Prefeitura — 2,80% a.m. (até 96x)</option>
+      <option value="clt">CLT — 3,55% a.m. (até 36x)</option>
+    </select>
+    <input type="number" id="valor" placeholder="Valor (R$)" min="0" step="0.01" aria-label="Valor desejado">
+    <input type="number" id="parcelas" placeholder="Parcelas" min="1" step="1" aria-label="Quantidade de parcelas">
+  </div>
+
+  <div style="text-align:center;">
+    <button class="btn-calc" onclick="simular()">Calcular</button>
+  </div>
+
+  <div class="resultado" id="resultado" role="status" aria-live="polite"></div>
+<small style="display:block;margin-top:8px;color:#bbb;font-size:0.75rem">
+Valores estimados. Taxas e condições sujeitas à análise de crédito e convênio com a instituição financeira.
+</small>
+</section>
+
+<section class="simulador fintech-card"
+id="simulador-portabilidade"
+aria-label="Simulador de Portabilidade e Refinanciamento">
+
+ <div class="fintech-head">
+
+    <div class="fintech-icon">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+    </div>
+
+    <div>
+
+        <div class="fintech-kicker">
+            COMPARE CONDIÇÕES
+        </div>
+
+        <h2 class="fintech-title">
+            Portabilidade e Refinanciamento
+        </h2>
+
+        <p class="fintech-desc">
+            Compare as condições do seu contrato atual
+            e visualize possíveis diferenças de taxa,
+            parcela e prazo.
+        </p>
+
+    </div>
+
+</div>
+  <div class="fields">
+    <select id="tipoOperacao">
+      <option value="portabilidade">Portabilidade (reduzir juros)</option>
+      <option value="refinanciamento">Refinanciamento (novo prazo)</option>
+    </select>
+
+    <input type="number" id="saldoDevedor" placeholder="Saldo devedor atual (R$)" min="0" step="0.01">
+    <input type="number" id="taxaAtual" placeholder="Taxa atual % a.m." value="1.80" min="0" step="0.01">
+    <input type="number" id="taxaNova" placeholder="Nova taxa % a.m." value="1.60" min="0" step="0.01">
+    <input type="number" id="parcelasRestantes" placeholder="Parcelas restantes" min="1" step="1">
+    <input type="number" id="parcelasNovas" placeholder="Novas parcelas" min="1" step="1">
+  </div>
+
+  <div style="text-align:center;">
+    <button class="btn-calc" onclick="simularPortabilidade()">Calcular</button>
+  </div>
+
+  <div class="resultado" id="resultadoPortabilidade"></div>
+
+  <small style="display:block;margin-top:8px;color:#bbb;font-size:0.75rem">
+    Simulação estimada com base nas taxas atuais do consignado. Condições sujeitas à análise de crédito e política da instituição.
+  </small>
+</section>
+
+<!-- QUEM SOMOS -->
+<section class="quemsomos fintech-card" id="quemsomos">
+
+<!-- PARCEIROS -->
+<div class="parceiros-wrapper" aria-label="Parceiros">
+  <div class="parceiros-track" id="parceirosTrack">
+    <img src="banco1.png" alt="Parceiro 1">
+    <img src="banco2.png" alt="Parceiro 2">
+    <img src="banco3.png" alt="Parceiro 3">
+    <img src="banco5.png" alt="Parceiro 5">
+    <img src="banco6.png" alt="Parceiro 6">
+    <img src="banco7.png" alt="Parceiro 7">
+    <img src="banco8.png" alt="Parceiro 8">
+    <img src="banco9.png" alt="Parceiro 9">
+    <img src="banco10.png" alt="Parceiro 10">
+    <img src="banco11.png" alt="Parceiro 11">
+    <img src="banco12.png" alt="Parceiro 12">
+    <!-- duplicated for smooth loop -->
+    <img src="banco1.png" alt="Parceiro 1">
+    <img src="banco2.png" alt="Parceiro 2">
+    <img src="banco3.png" alt="Parceiro 3">
+    <img src="banco5.png" alt="Parceiro 5">
+    <img src="banco6.png" alt="Parceiro 6">
+    <img src="banco7.png" alt="Parceiro 7">
+    <img src="banco8.png" alt="Parceiro 8">
+    <img src="banco9.png" alt="Parceiro 9">
+    <img src="banco10.png" alt="Parceiro 10">
+    <img src="banco11.png" alt="Parceiro 11">
+    <img src="banco12.png" alt="Parceiro 12">
+  </div>
+</div>
+
+<!-- NOSSOS SERVIÇOS -->
+<div class="container" id="servicos">
+
+<section class="section servicos-premium fintech-card">
+
+<div class="fintech-head">
+
+    <div class="fintech-icon">
+        <i class="fa-solid fa-coins"></i>
+    </div>
+
+    <div>
+
+        <div class="fintech-kicker">
+            NOSSAS SOLUÇÕES
+        </div>
+
+        <h2 class="fintech-title">
+            Crédito inteligente para cada necessidade
+        </h2>
+
+        <p class="fintech-desc">
+            Soluções financeiras para diferentes perfis
+            e convênios, com análise individual e atendimento
+            especializado.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="servicos-grid">
+
+<div class="service-card">
+<i class="fa-solid fa-user-check"></i>
+<h3>INSS</h3>
+<p>
+Crédito consignado para aposentados e pensionistas
+com taxas reduzidas e aprovação simplificada.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-building-columns"></i>
+<h3>Prefeitura de Porto Alegre</h3>
+<p>
+Atendimento especializado para servidores municipais.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-briefcase"></i>
+<h3>CLT</h3>
+<p>
+Antecipação e crédito para trabalhadores com carteira assinada.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-right-left"></i>
+<h3>Portabilidade</h3>
+<p>
+Transfira seu contrato para reduzir juros e economizar.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-rotate"></i>
+<h3>Refinanciamento</h3>
+<p>
+Renegocie seu contrato e libere novo valor.
+</p>
+</div>
+
+<div class="service-card">
+<i class="fa-solid fa-money-bill-trend-up"></i>
+<h3>FGTS</h3>
+<p>
+Antecipação do Saque-Aniversário com liberação rápida.
+</p>
+</div>
+
+</div>
+
+</section>
+</div>
+
+
+<!-- FAQ -->
+<div class="container">
+  <section class="section fintech-card" aria-label="Perguntas Frequentes">
+
+<div class="fintech-head">
+
+    <div class="fintech-icon">
+        <i class="fa-solid fa-circle-question"></i>
+    </div>
+
+    <div>
+
+        <div class="fintech-kicker">
+            DÚVIDAS FREQUENTES
+        </div>
+
+        <h2 class="fintech-title">
+            Perguntas Frequentes
+        </h2>
+
+        <p class="fintech-desc">
+            Respostas rápidas para as principais dúvidas
+            sobre crédito consignado e nossos serviços.
+        </p>
+
+    </div>
+
+</div>
+    <div class="faq-grid">
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> O que é o empréstimo consignado?</button><div class="faq-resposta">É uma modalidade de crédito em que as parcelas são descontadas diretamente do salário ou benefício. Por isso costuma ter taxas menores.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Quem pode contratar o consignado?</button><div class="faq-resposta">Aposentados e pensionistas do INSS, servidores públicos (federal, estadual e municipal), militares e trabalhadores CLT de empresas conveniadas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> O que é margem consignável?</button><div class="faq-resposta">É o limite máximo da renda que pode ser comprometida com parcelas. Normalmente 35% para empréstimos e 5% exclusivos para cartão consignado.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Diferença entre refinanciamento e portabilidade?</button><div class="faq-resposta">Refinanciamento aumenta o prazo e pode liberar novo valor; portabilidade transfere o contrato para outra instituição (buscando melhores taxas).</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> O que é o cartão consignado?</button><div class="faq-resposta">Cartão de crédito onde o valor mínimo da fatura é descontado automaticamente do salário ou benefício, com taxas reduzidas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Posso ter mais de um empréstimo consignado?</button><div class="faq-resposta">Sim, desde que exista margem disponível para assumir novas parcelas.</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Quanto tempo demora para o dinheiro cair?</button><div class="faq-resposta">Após aprovação e assinatura, normalmente o crédito é liberado entre 24 e 72 horas úteis (varia conforme instituição).</div></div>
+      <div class="faq-item"><button onclick="toggleFAQ(this)"> Quais documentos são necessários?</button><div class="faq-resposta">RG/CNH, CPF, comprovante de residência e contracheque ou extrato do benefício atualizado.</div></div>
+    </div>
+  </section>
+</div>
+
+
+<!-- CONTATO FINTECH -->
+<section id="contato" class="fintech-card contato-fintech">
+
+  <div class="fintech-head">
+    <div class="fintech-icon">
+      <i class="fa-solid fa-headset"></i>
+    </div>
+
+    <div>
+      <div class="fintech-kicker">FALE COM A CREDCORE</div>
+      <h2 class="fintech-title">Entre em Contato</h2>
+      <p class="fintech-desc">
+        Fale com a nossa equipe pelos canais oficiais e escolha a forma mais fácil de atendimento para você.
+      </p>
+    </div>
+  </div>
+
+  <div class="contato-grid-fintech">
+
+    <a class="contato-card-fintech" href="https://wa.me/5551989181267" target="_blank" rel="noopener noreferrer">
+      <div class="contato-card-icon"><i class="fa-brands fa-whatsapp"></i></div>
+      <div class="contato-card-texto">
+        <span class="contato-card-label">ATENDIMENTO RÁPIDO</span>
+        <h3>WhatsApp</h3>
+        <p>Fale diretamente com a nossa equipe.</p>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square contato-card-arrow"></i>
+    </a>
+
+    <a class="contato-card-fintech" href="mailto:atendimento@credcorefinanciamentos.com.br">
+      <div class="contato-card-icon"><i class="fa-solid fa-envelope"></i></div>
+      <div class="contato-card-texto">
+        <span class="contato-card-label">ATENDIMENTO POR E-MAIL</span>
+        <h3>E-mail</h3>
+        <p>Envie sua dúvida ou solicitação.</p>
+      </div>
+      <i class="fa-solid fa-arrow-right contato-card-arrow"></i>
+    </a>
+
+    <a class="contato-card-fintech" href="https://www.instagram.com/credcorefinanciamentos/" target="_blank" rel="noopener noreferrer">
+      <div class="contato-card-icon"><i class="fa-brands fa-instagram"></i></div>
+      <div class="contato-card-texto">
+        <span class="contato-card-label">ACOMPANHE A CREDCORE</span>
+        <h3>Instagram</h3>
+        <p>Conteúdos, novidades e informações.</p>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square contato-card-arrow"></i>
+    </a>
+
+    <a class="contato-card-fintech" href="https://www.facebook.com/people/Credcore-Financiamentos/61591404437825/" target="_blank" rel="noopener noreferrer">
+      <div class="contato-card-icon"><i class="fa-brands fa-facebook-f"></i></div>
+      <div class="contato-card-texto">
+        <span class="contato-card-label">NOSSA PÁGINA</span>
+        <h3>Facebook</h3>
+        <p>Acesse nossa página oficial.</p>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square contato-card-arrow"></i>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- WHATSAPP FIXO -->
+<a id="whats-fixo" href="https://wa.me/5551995167469" target="_blank">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+
+
+<footer class="footer">
+
+<div class="footer-container">
+
+<div class="footer-col">
+<h4>CREDCORE FINANCIAMENTOS</h4>
+
+<p>
+Soluções financeiras com transparência, segurança e atendimento especializado para aposentados, pensionistas, servidores públicos e trabalhadores CLT.
+</p>
+
+<div class="fintech-seals">
+<div class="fintech-seal">🔒 Site Seguro SSL</div>
+<div class="fintech-seal">🛡️ Proteção LGPD</div>
+<div class="fintech-seal">✅ Atendimento Verificado</div>
+</div>
+
+<a href="https://wa.me/5551989181267" class="footer-whats">
+<i class="fa-brands fa-whatsapp"></i>
+Falar com Especialista
+</a>
+
+</div>
+
+<div class="footer-col">
+<h4>NAVEGAÇÃO</h4>
+
+<a href="#inicio">Início</a>
+<a href="#prefeituraPOA">Prefeitura de Porto Alegre</a>
+<a href="#simulador">Simuladores</a>
+<a href="#quemsomos">Quem Somos</a>
+<a href="#contato">Contato</a>
+
+<div class="footer-policy">
+<a href="privacidade.html" target="_blank">
+Política de Privacidade
+</a>
+
+<a href="termos.html" target="_blank">
+Termos de Uso
+</a>
+</div>
+
+</div>
+
+<div class="footer-col">
+<h4>CENTRO DE ATENDIMENTO</h4>
+
+<p><i class="fa-brands fa-whatsapp"></i> (51) 98918-1267</p>
+<p><i class="fa-solid fa-envelope"></i> atendimento@credcorefinanciamentos.com.br</p>
+<p><i class="fa-brands fa-instagram"></i> @credcorefinanciamentos</p>
+<p><i class="fa-solid fa-clock"></i> Segunda a Sexta • 09h às 18h</p>
+<p><i class="fa-solid fa-location-dot"></i> Porto Alegre • RS</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<strong>CREDCORE FINANCIAMENTOS</strong><br>
+
+CNPJ: 54.989.191/0001-95<br>
+
+Empresa especializada em crédito consignado, refinanciamento, portabilidade e soluções financeiras para servidores públicos, aposentados e pensionistas.
+
+<br><br>
+
+🔒 Ambiente protegido por criptografia SSL<br>
+🛡️ Tratamento de dados em conformidade com a LGPD<br>
+✅ Atendimento humanizado e transparente
+
+<br><br>
+
+© 2026 Credcore Financiamentos. Todos os direitos reservados.
+
+</div>
+
+</footer>
+
+
+
+<script>
+
+/* abrir whatsapp */
+function abrirWhats(){ window.open('https://wa.me/5551995167469?text=Ol%C3%A1!%20Quero%20uma%20simula%C3%A7%C3%A3o','_blank'); }
+
+/* Simulador consignado (PRICE) */
+function simular(){
+  const tipo = document.getElementById('tipoCredito').value;
+  const v = parseFloat(document.getElementById('valor').value);
+  const p = parseInt(document.getElementById('parcelas').value);
+  const out = document.getElementById('resultado');
+  if(isNaN(v) || v <= 0 || isNaN(p) || p < 1){ out.innerText = 'Preencha Valor e Parcelas corretamente.'; return; }
+  let juros, maxParc, nome;
+  if(tipo === 'inss'){ juros = 0.018; maxParc = 96; nome='INSS'; }
+  else if(tipo === 'governo'){ juros = 0.028; maxParc = 96; nome='Governo / Prefeitura'; }
+  else { juros = 0.0355; maxParc = 36; nome='CLT'; }
+  if(p > maxParc){ out.innerHTML = `Número de parcelas excede o limite para <strong>${nome}</strong>. Máximo: ${maxParc}x.`; return; }
+  const parcela = (v * juros) / (1 - Math.pow(1 + juros, -p));
+  const total = parcela * p;
+  out.innerHTML = `Simulação: <strong>${nome}</strong><br>Taxa: <strong>${(juros*100).toFixed(2)}% a.m.</strong><br>Parcela estimada: <strong>R$ ${parcela.toFixed(2)}</strong> • ${p}x<br>Total a pagar: <strong>R$ ${total.toFixed(2)}</strong>`;
+}
+
+function simularPortabilidade(){
+  const saldo = parseFloat(document.getElementById('saldoDevedor').value);
+  const taxaAtual = parseFloat(document.getElementById('taxaAtual').value) / 100;
+  const taxaNova = parseFloat(document.getElementById('taxaNova').value) / 100;
+  const parcelasAtual = parseInt(document.getElementById('parcelasRestantes').value);
+  const parcelasNova = parseInt(document.getElementById('parcelasNovas').value);
+  const tipo = document.getElementById('tipoOperacao').value;
+  const out = document.getElementById('resultadoPortabilidade');
+
+  if(
+    isNaN(saldo) || saldo <= 0 ||
+    isNaN(taxaAtual) || isNaN(taxaNova) ||
+    isNaN(parcelasAtual) || parcelasAtual < 1 ||
+    isNaN(parcelasNova) || parcelasNova < 1
+  ){
+    out.innerText = 'Preencha todos os campos corretamente.';
+    return;
+  }
+
+  // Parcela atual (PRICE)
+  const parcelaAtual = (saldo * taxaAtual) / (1 - Math.pow(1 + taxaAtual, -parcelasAtual));
+  const totalAtual = parcelaAtual * parcelasAtual;
+
+  // Parcela nova (PRICE)
+  const parcelaNova = (saldo * taxaNova) / (1 - Math.pow(1 + taxaNova, -parcelasNova));
+  const totalNovo = parcelaNova * parcelasNova;
+
+  const economiaMensal = parcelaAtual - parcelaNova;
+  const economiaTotal = totalAtual - totalNovo;
+
+  out.innerHTML = `
+    <strong>${tipo === 'portabilidade' ? 'Resultado da Portabilidade' : 'Resultado do Refinanciamento'}</strong><br>
+    Parcela atual: <strong>R$ ${parcelaAtual.toFixed(2)}</strong> (${parcelasAtual}x)<br>
+    Parcela nova: <strong>R$ ${parcelaNova.toFixed(2)}</strong> (${parcelasNova}x)<br>
+    Total atual: R$ ${totalAtual.toFixed(2)}<br>
+    Total novo: R$ ${totalNovo.toFixed(2)}<br>
+    Economia mensal: <strong style="color:${economiaMensal > 0 ? '#25d366' : '#ff4d4d'}">
+      R$ ${economiaMensal.toFixed(2)}
+    </strong><br>
+    Economia total: <strong>R$ ${economiaTotal.toFixed(2)}</strong>
+  `;
+}
+
+/* FAQ toggle (abre só 1) */
+function toggleFAQ(btn){
+  const item = btn.parentElement;
+  document.querySelectorAll('.faq-item').forEach(f => { if(f !== item) f.classList.remove('active'); });
+  item.classList.toggle('active');
+}
+
+/* Pausa parceiros on hover */
+const track = document.getElementById('parceirosTrack');
+if(track){
+  track.addEventListener('mouseenter', ()=> track.style.animationPlayState = 'paused');
+  track.addEventListener('mouseleave', ()=> track.style.animationPlayState = 'running');
+}
+
+/* AJUSTA DOCUMENTOS POR CONVÊNIO */
+ function ajustarConvenio(){
+  const c = document.getElementById('convenio').value;
+  const docs = document.getElementById('docsArea');
+
+  let msg = '';
+
+  if(c === 'inss'){
+    msg = '📄 Documentos necessários: RG/CPF e conta bancária (enviar pelo WhatsApp após a solicitação).';
+  }
+
+  if(c === 'governo'){
+    msg = '📄 Documentos necessários: RG/CPF, comprovante de residência, extrato bancário e senha de averbação (enviar pelo WhatsApp após a solicitação).';
+  }
+
+  if(c === 'clt'){
+    msg = '📄 Documentos necessários: RG/CPF, conta bancária e mínimo de 6 meses de carteira assinada (enviar pelo WhatsApp após a solicitação).';
+  }
+
+  docs.innerHTML = `<div style="color:#c9a227;font-weight:600;margin-top:10px;">${msg}</div>`;
+}
+
+/* CPF + IDADE */
+function validarCPF(cpf){
+  cpf = cpf.replace(/\D/g,'');
+  return cpf.length === 11;
+}
+
+function calcularIdade(data){
+  const hoje = new Date();
+  const nasc = new Date(data);
+  let idade = hoje.getFullYear() - nasc.getFullYear();
+  if(new Date(hoje.getFullYear(),nasc.getMonth(),nasc.getDate()) > hoje) idade--;
+  return idade;
+}
+
+
+/* ENVIO */
+let propostas = JSON.parse(localStorage.getItem('propostas')) || {};
+function enviarFormulario(){
+  const nome = document.getElementById('nome').value;
+  const cpf = document.getElementById('cpf').value;
+  const nasc = document.getElementById('nascimento').value;
+  const conv = document.getElementById('convenio').value;
+  const out = document.getElementById('resultadoAuto');
+
+  if(!validarCPF(cpf)){ out.innerText='CPF inválido'; return; }
+  if(calcularIdade(nasc) < 18){ out.innerText='Idade mínima 18 anos'; return; }
+
+  const protocolo = 'CCR-' + new Date().getFullYear() + '-' + Math.floor(Math.random()*999999);
+
+  propostas[cpf] = {
+    protocolo,
+    status:'Recebida',
+    mensagem:'Recebemos sua solicitação. Aguarde análise.'
+  };
+localStorage.setItem('propostas', JSON.stringify(propostas));
+
+  out.innerHTML = `
+✅ Solicitação enviada com sucesso!<br><br>
+<strong>Protocolo:</strong> ${protocolo}<br><br>
+📲 Nossa equipe da CREDCORE entrará em contato com você pelo WhatsApp para dar andamento à sua proposta.
+`;
+
+}
+const btnMenu = document.querySelector('.menu-toggle');
+const listaMenu = document.querySelector('.menu ul');
+
+if(btnMenu && listaMenu){
+  btnMenu.addEventListener('click', () => {
+    const aberto = listaMenu.classList.toggle('show');
+    btnMenu.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+    const icone = btnMenu.querySelector('i');
+    if(icone) icone.className = aberto ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  });
+  listaMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      listaMenu.classList.remove('show');
+      btnMenu.setAttribute('aria-expanded','false');
+      const icone = btnMenu.querySelector('i');
+      if(icone) icone.className = 'fa-solid fa-bars';
+    });
+  });
+}
+
+function consultarMargemPOA(){
+
+const nome = document.getElementById('nomePOA').value;
+const cpf = document.getElementById('cpfPOA').value;
+const matricula = document.getElementById('matriculaPOA').value;
+
+const out = document.getElementById('resultadoPOA');
+
+if(nome === '' || cpf === '' || matricula === ''){
+
+out.innerHTML =
+'Preencha todos os campos.';
+
+return;
+
+}
+
+const mensagem =
+`Olá! Sou servidor da Prefeitura de Porto Alegre.
+
+Gostaria de consultar minha margem consignável.
+
+Nome: ${nome}
+
+CPF: ${cpf}
+
+Matrícula: ${matricula}`;
+
+window.open(
+'https://wa.me/5551995167469?text=' +
+encodeURIComponent(mensagem),
+'_blank'
+);
+
+}
+
+</script>
+</body>
+</html>
